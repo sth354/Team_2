@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Team2Application {
     //This is Freyr's comment
     //Axel's commit
+    //Bjarni :)
     public static void main(String[] args) {
         SpringApplication.run(Team2Application.class, args);
     }
