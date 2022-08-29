@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Team2Application {
     //This is Freyr's comment
-    //Axel's commit
+    //Axel's commit and another commit from testbranch
     //Bjarni :)
     public static void main(String[] args) {
         SpringApplication.run(Team2Application.class, args);
