@@ -3,8 +3,8 @@ package is.hi.hbv501g.team_2.models;
 import java.util.ArrayList;
 
 public class Director {
-    private String name;
-    private ArrayList<Movie> movies;
+    private final String name;
+    private final ArrayList<Movie> movies;
 
     public Director(String name, ArrayList<Movie> movies) {
         this.name = name;
@@ -21,7 +21,7 @@ public class Director {
 
     @Override
     public String toString() {
-        return "Director [name=" + name + ", movies=" + movies + "]";
+        return name;
     }
 
 }

@@ -2,9 +2,9 @@ package is.hi.hbv501g.team_2.models;
 
 public class Movie {
 
-    private String movieId;
-    private String title;
-    private Integer year;
+    private final String movieId;
+    private final String title;
+    private final Integer year;
 
     public Movie(String movieId, String title, Integer year) {
         this.movieId = movieId;
@@ -25,8 +25,6 @@ public class Movie {
     }
 
     @Override
-    public String toString() {
-        return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + "]";
-    }
+    public String toString() { return title + " (" + year + ")"; }
 
 }
