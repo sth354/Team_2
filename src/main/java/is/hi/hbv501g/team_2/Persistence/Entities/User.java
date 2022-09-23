@@ -1,4 +1,4 @@
-package is.hi.hbv501g.team_2.models;
+package is.hi.hbv501g.team_2.Persistence.Entities;
 
 public class User {
     private final String userId;
