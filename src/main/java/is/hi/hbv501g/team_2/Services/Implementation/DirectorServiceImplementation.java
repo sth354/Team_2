@@ -1,8 +1,6 @@
 package is.hi.hbv501g.team_2.Services.Implementation;
 
-import is.hi.hbv501g.team_2.Controllers.MainController;
 import is.hi.hbv501g.team_2.Persistence.Entities.Director;
-import is.hi.hbv501g.team_2.Persistence.Entities.Movie;
 import is.hi.hbv501g.team_2.Persistence.Repositories.DirectorRepository;
 import is.hi.hbv501g.team_2.Services.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -18,9 +18,10 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String title, Integer year) {
+    public Movie(String title, Integer year, Director director) {
         this.title = title;
         this.year = year;
+        this.director = director;
     }
 
     public long getID() {
