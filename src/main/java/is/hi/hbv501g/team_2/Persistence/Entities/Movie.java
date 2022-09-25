@@ -1,9 +1,19 @@
 package is.hi.hbv501g.team_2.Persistence.Entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "movies")
 public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
+
     private  String title;
     private  Integer year;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Director director;
 
     public Movie() {
     }

@@ -1,10 +1,18 @@
 package is.hi.hbv501g.team_2.Persistence.Entities;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 
+@Entity
+@Table(name = "directors")
 public class Director {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
+
     private String name;
+
+    @OneToMany(mappedBy = "director", cascade =  CascadeType.ALL)
     private ArrayList<Movie> movies;
 
     public Director() {

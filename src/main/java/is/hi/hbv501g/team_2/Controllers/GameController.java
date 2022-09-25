@@ -17,10 +17,9 @@ public class GameController {
 
     @RequestMapping("/game")
     public String gamePage(Model model) {
-        //Business logic
-        //Call a method in a Service Class
-        model.addAttribute("directors",directorService.findAll());
-        //Add some data to the Model
+
+        // make game... xD
+
         return "game";
     }
 }
