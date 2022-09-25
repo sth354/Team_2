@@ -11,5 +11,5 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     List<Movie> findAll();
 
-    List<Movie> getMovieByDirectorEqualsIgnoreCase(Director director);
+    //List<Movie> getMovieByDirectorEqualsIgnoreCase(Director director);
 }

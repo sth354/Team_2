@@ -28,8 +28,4 @@ public class MovieServiceImplementation implements MovieService {
         return movieRepository.findAll();
     }
 
-    @Override
-    public List<Movie> getMovieByDirectorEqualsIgnoreCase(Director director) {
-        return movieRepository.getMovieByDirectorEqualsIgnoreCase(director);
-    }
 }

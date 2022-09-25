@@ -2,6 +2,7 @@ package is.hi.hbv501g.team_2.Persistence.Entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "directors")
@@ -13,12 +14,12 @@ public class Director {
     private String name;
 
     @OneToMany(mappedBy = "director", cascade =  CascadeType.ALL)
-    private ArrayList<Movie> movies;
+    private List<Movie> movies;
 
     public Director() {
     }
 
-    public Director(String name, ArrayList<Movie> movies) {
+    public Director(String name, List<Movie> movies) {
         this.name = name;
         this.movies = movies;
     }
@@ -39,11 +40,11 @@ public class Director {
         this.name = name;
     }
 
-    public ArrayList<Movie> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
+    public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
 

@@ -10,5 +10,5 @@ public interface MovieService {
 
     List<Movie> findAll();
 
-    List<Movie> getMovieByDirectorEqualsIgnoreCase(Director director);
+    //List<Movie> getMovieByDirectorEqualsIgnoreCase(Director director);
 }
