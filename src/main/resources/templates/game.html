@@ -11,13 +11,15 @@
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Movies they made</th>
+                <th>Their movie</th>
+                <th>Random movie</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="d : ${directors}">
-                <td th:text="${d.name}"></td>
-                <td th:text="${d.movies}"></td>
+            <tr>
+                <td th:text="${director.name}"></td>
+                <td th:text="${movie}"></td>
+                <td th:text="${randomMovie}"></td>
             </tr>
             </tbody>
         </table>
