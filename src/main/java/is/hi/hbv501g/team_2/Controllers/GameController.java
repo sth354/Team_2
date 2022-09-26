@@ -22,7 +22,8 @@ public class GameController {
     public String gamePage(Model model) {
 
         List<Director> directors = directorService.findAll();
-        model.addAttribute("directors",directors);
+        int random = (int)(Math.random() * 3);
+        model.addAttribute("director",directors);
         // make game... xD
 
         return "game";
