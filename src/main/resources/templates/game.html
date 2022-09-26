@@ -7,7 +7,20 @@
 <body>
     <div>
         <h2>Game time!!!</h2>
-        
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Movies they made</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="d : ${directors}">
+                <td th:text="${d.name}"></td>
+                <td th:text="${d.movies}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

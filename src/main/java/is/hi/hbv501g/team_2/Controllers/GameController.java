@@ -22,7 +22,7 @@ public class GameController {
     public String gamePage(Model model) {
 
         List<Director> directors = directorService.findAll();
-
+        model.addAttribute("directors",directors);
         // make game... xD
 
         return "game";
