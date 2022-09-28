@@ -7,22 +7,11 @@
 <body>
     <div>
         <h2>Game time!!!</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Their movie</th>
-                <th>Random movie</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td th:text="${director.name}"></td>
-                <td th:text="${movie}"></td>
-                <td th:text="${randomMovie}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <p>
+            Which movie did <span th:text="${director.name}">director name here</span> direct?
+        </p>
+        <input type="button" th:value=${movie}/>
+        <input type="button" th:value=${randomMovie}/>
     </div>
 </body>
 </html>

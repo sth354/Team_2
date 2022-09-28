@@ -15,11 +15,13 @@ import java.util.List;
 public class GameController {
     private DirectorService directorService;
     private MovieService movieService;
+    private int lives;
 
     @Autowired
     public GameController(DirectorService directorService, MovieService movieService) {
         this.directorService = directorService;
         this.movieService = movieService;
+        lives = 3;
     }
 
     @RequestMapping("/game")
@@ -32,6 +34,7 @@ public class GameController {
         model.addAttribute("director", directors.get(random));
         model.addAttribute("movie", directors.get(random).getMovies().get(random));
         model.addAttribute("randomMovie", movies.get(randomM));
+        model.addAttribute("lives",lives);
         // make game... xD
 
         return "game";

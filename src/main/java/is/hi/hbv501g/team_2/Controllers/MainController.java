@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     @RequestMapping("/")
-    public String GameController() {
+    public String mainMenu() {
         //Business logic
         //Call a method in a Service Class
         //Add some data to the Model
