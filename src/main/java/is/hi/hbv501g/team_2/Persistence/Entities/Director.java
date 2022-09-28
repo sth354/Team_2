@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+//@Entity
 @Table(name = "directors")
 public class Director {
     @Id
@@ -20,6 +20,7 @@ public class Director {
     }
 
     public Director(String name, List<Movie> movies) {
+        //test comment git
         this.name = name;
         this.movies = movies;
     }
