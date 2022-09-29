@@ -11,21 +11,25 @@ import java.util.List;
 @Service
 public class DirectorServiceImplementation implements DirectorService {
     private DirectorRepository directorRepository;
-
     private List<Director> allDirectors;
 
 
     @Autowired
     public DirectorServiceImplementation(DirectorRepository directorRepository) {
         this.directorRepository = directorRepository;
+        this.allDirectors = directorRepository.findAll();
+
     }
 
     @Override
     public List<Director> findAll() {
-        if (allDirectors == null) {
-            allDirectors = directorRepository.findAll();
-        }
         return allDirectors;
+    }
+
+    @Override
+    public Director getRandomDirector() {
+        int random = (int)(Math.random() * allDirectors.size());
+        return allDirectors.get(random);
     }
 
 }
