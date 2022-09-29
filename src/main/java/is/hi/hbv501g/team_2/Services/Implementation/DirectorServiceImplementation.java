@@ -12,6 +12,9 @@ import java.util.List;
 public class DirectorServiceImplementation implements DirectorService {
     private DirectorRepository directorRepository;
 
+    private List<Director> allDirectors;
+
+
     @Autowired
     public DirectorServiceImplementation(DirectorRepository directorRepository) {
         this.directorRepository = directorRepository;
@@ -19,6 +22,10 @@ public class DirectorServiceImplementation implements DirectorService {
 
     @Override
     public List<Director> findAll() {
-        return directorRepository.findAll();
+        if (allDirectors == null) {
+            allDirectors = directorRepository.findAll();
+        }
+        return allDirectors;
     }
+
 }
