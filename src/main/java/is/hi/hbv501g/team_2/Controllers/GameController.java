@@ -27,13 +27,13 @@ public class GameController {
     @RequestMapping("/game")
     public String gamePage(Model model) {
 
-        List<Director> directors = directorService.findAll();
-        List<Movie> movies = movieService.findAll();
-        int random = (int)(Math.random() * 2);
-        int randomM = (int)(Math.random() * 2);
-        model.addAttribute("director", directors.get(random));
-        model.addAttribute("movie", directors.get(random).getMovies().get(random));
-        model.addAttribute("randomMovie", movies.get(randomM));
+        Director director = directorService.getRandomDirector();
+
+        Movie movie = movieService.getRandomMovieFromDirector(director);
+
+        model.addAttribute("director", director);
+        model.addAttribute("movie", movie);
+        model.addAttribute("randomMovie", movieService.getRandomMovie(movie));
         model.addAttribute("lives",lives);
         // make game... xD
 

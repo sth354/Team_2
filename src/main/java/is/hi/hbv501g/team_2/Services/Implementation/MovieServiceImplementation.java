@@ -13,9 +13,12 @@ import java.util.List;
 public class MovieServiceImplementation implements MovieService {
     private MovieRepository movieRepository;
 
+    private List<Movie> allMovies;
+
     @Autowired
     public MovieServiceImplementation(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
+        this.allMovies = movieRepository.findAll();
     }
 
     @Override
@@ -26,6 +29,23 @@ public class MovieServiceImplementation implements MovieService {
     @Override
     public List<Movie> findAll() {
         return movieRepository.findAll();
+    }
+
+    @Override
+    public Movie getRandomMovie(Movie movie) {
+        while (true) {
+            int random = (int) (Math.random() * allMovies.size());
+            if (!allMovies.get(random).equals(movie)) {
+                return allMovies.get(random);
+            }
+        }
+    }
+
+    @Override
+    public Movie getRandomMovieFromDirector(Director director) {
+        List<Movie> movies = director.getMovies();
+        int random = (int)(Math.random() * movies.size());
+        return movies.get(random);
     }
 
 }
