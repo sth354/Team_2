@@ -10,8 +10,12 @@
         <p>
             Which movie did <span th:text="${director.name}">director name here</span> direct?
         </p>
-        <input type="button" th:value=${movie}/>
-        <input type="button" th:value=${randomMovie}/>
+
+        <form action="#" th:action="@{/checkAnswer}" method="GET">
+            <input type="submit" name="action" th:value="${movie}"/>
+            <input type="submit" name="action" th:value="${randomMovie}"/>
+        </form>
+
     </div>
 </body>
 </html>
