@@ -8,12 +8,14 @@
     <div>
         <h2>Game time!!!</h2>
         <p>
-            Which movie did <span th:text="${director.name}">director name here</span> direct?
+            Lives: <span th:text="${lives}"></span> Score: <span th:text="${score}"></span>
+            <br>
+            Which movie did <span th:text="${director}">director name here</span> direct?
         </p>
 
         <form action="#" th:action="@{/checkAnswer}" method="GET">
-            <input type="submit" name="action" th:value="${movie}"/>
-            <input type="submit" name="action" th:value="${randomMovie}"/>
+            <input type="submit" name="action" th:value="${movie1}"/>
+            <input type="submit" name="action" th:value="${movie2}"/>
         </form>
 
     </div>
