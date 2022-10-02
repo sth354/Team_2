@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/styles.css" type="text/css" th:href="@{/css/styles.css}" />
     <title> Game Over </title>
 </head>
-<body>
-    <h2> Game Over </h2>
-    <p> Your score was: <span th:text="${score}">your score</span> </p>
-    <p> <a href="/">Return to main menu</a> </p>
-</body>
+    <body>
+        <h1 class="page-title"> Game Over </h1>
+        <div class="main-container">
+            <div class="menu">
+                <div class="menu-item">
+                    <p> Your score was: <span th:text="${score}">your score</span> </p>
+                    <p> <a href="/">Return to main menu</a> </p>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
