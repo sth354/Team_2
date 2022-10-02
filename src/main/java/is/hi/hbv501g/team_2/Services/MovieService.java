@@ -10,8 +10,6 @@ public interface MovieService {
 
     List<Movie> findAll();
 
-    Movie getRandomMovie(Movie movie);
-
     Movie getRandomMovieNotFromDirector(Director director);
 
     Movie getRandomMovieFromDirector(Director director);

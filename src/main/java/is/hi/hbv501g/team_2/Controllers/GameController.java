@@ -46,13 +46,11 @@ public class GameController {
         movies.add(randomMovie);
         Collections.shuffle(movies);
 
-        model.addAttribute("lives",lives);
         model.addAttribute("director", director);
         model.addAttribute("movie1", movies.get(0));
         model.addAttribute("movie2", movies.get(1));
         model.addAttribute("lives",lives);
         model.addAttribute("score",score);
-        // make game... xD
 
         return "game";
     }
