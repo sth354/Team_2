@@ -35,7 +35,7 @@ public class MovieServiceImplementation implements MovieService {
     public Movie getRandomMovie(Movie movie) {
         while (true) {
             int random = (int) (Math.random() * allMovies.size());
-            if (!allMovies.get(random).equals(movie)) {
+            if (!(allMovies.get(random).equals(movie))) {
                 return allMovies.get(random);
             }
         }

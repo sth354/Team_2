@@ -18,33 +18,55 @@ public class GameController {
     private DirectorService directorService;
     private MovieService movieService;
     private int lives;
+    private int score;
+
+    private Director director;
 
     @Autowired
     public GameController(DirectorService directorService, MovieService movieService) {
         this.directorService = directorService;
         this.movieService = movieService;
         lives = 3;
+        score = 0;
     }
 
     @RequestMapping("/game")
     public String gamePage(Model model) {
+        if (lives == 0) {
+            return endGame(model);
+        }
 
-        Director director = directorService.getRandomDirector();
+        director = directorService.getRandomDirector();
 
         Movie movie = movieService.getRandomMovieFromDirector(director);
 
+        model.addAttribute("lives",lives);
         model.addAttribute("director", director);
         model.addAttribute("movie", movie);
         model.addAttribute("randomMovie", movieService.getRandomMovie(movie));
         model.addAttribute("lives",lives);
+        model.addAttribute("score",score);
         // make game... xD
 
         return "game";
     }
 
     @RequestMapping(value = "/checkAnswer", method = RequestMethod.GET)
-    public String checkAnswer(@RequestParam String action, Model m) {
+    public String checkAnswer(@RequestParam String action, Model model) {
         System.out.println(action);
+        if (director.getMovies().contains(action)) {
+            score++;
+        }
+        else {
+            lives--;
+        }
         return "redirect:/game";
+    }
+
+    @RequestMapping(value = "/end", method = RequestMethod.GET)
+    private String endGame(Model model) {
+        lives = 3;
+        model.addAttribute("score",score);
+        return "end";
     }
 }
