@@ -2,22 +2,29 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/styles.css" type="text/css" th:href="@{/css/styles.css}" />
     <title>Game</title>
 </head>
 <body>
-    <div>
-        <h2>Game time!!!</h2>
-        <p>
-            Lives: <span th:text="${lives}"></span> Score: <span th:text="${score}"></span>
-            <br>
-            Which movie did <span th:text="${director}">director name here</span> direct?
-        </p>
-
-        <form action="#" th:action="@{/checkAnswer}" method="GET">
-            <input type="submit" name="action" th:value="${movie1}"/>
-            <input type="submit" name="action" th:value="${movie2}"/>
-        </form>
-
+    <div class="wrapper">
+        <h1 class="page-title">The Director Guessing Game!</h1>
+        <div class="main-container">
+            <div class="menu">
+                <div class="menu-item">
+                    <p>
+                        Lives: <span th:text="${lives}"></span> Score: <span th:text="${score}"></span>
+                        <br>
+                        Which movie did <span th:text="${director}">director name here</span> direct?
+                    </p>
+                </div>
+                <div class="menu-item">
+                    <form action="#" th:action="@{/checkAnswer}" method="GET">
+                        <input type="submit" name="action" th:value="${movie1}"/>
+                        <input type="submit" name="action" th:value="${movie2}"/>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
