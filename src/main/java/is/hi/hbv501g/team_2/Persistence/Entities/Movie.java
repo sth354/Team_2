@@ -51,4 +51,8 @@ public class Movie {
     @Override
     public String toString() { return title + " (" + year + ")"; }
 
+    public boolean equals(Movie movie) {
+        return movie.getTitle().equals(title);
+    }
+
 }

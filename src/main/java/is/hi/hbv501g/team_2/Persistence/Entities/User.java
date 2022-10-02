@@ -1,13 +1,12 @@
 package is.hi.hbv501g.team_2.Persistence.Entities;
 
-import javax.persistence.*;
-
 //@Entity
 //@Table(name = "users")
 public class User {
+    // Will be implemented later
     //@Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String userId;
+    private long ID;
 
     private String userName;
     private String password;
@@ -19,12 +18,12 @@ public class User {
         this.password = password;
     }
 
-    public String getUserId() {
-        return userId;
+    public long getID() {
+        return ID;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
     public String getUserName() {
