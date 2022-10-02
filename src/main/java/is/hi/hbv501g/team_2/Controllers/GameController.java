@@ -43,7 +43,7 @@ public class GameController {
         model.addAttribute("lives",lives);
         model.addAttribute("director", director);
         model.addAttribute("movie", movie);
-        model.addAttribute("randomMovie", movieService.getRandomMovie(movie));
+        model.addAttribute("randomMovie", movieService.getRandomMovieNotFromDirector(director));
         model.addAttribute("lives",lives);
         model.addAttribute("score",score);
         // make game... xD

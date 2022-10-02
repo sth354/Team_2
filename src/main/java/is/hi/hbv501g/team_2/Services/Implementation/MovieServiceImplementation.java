@@ -35,11 +35,19 @@ public class MovieServiceImplementation implements MovieService {
     public Movie getRandomMovie(Movie movie) {
         while (true) {
             int random = (int) (Math.random() * allMovies.size());
-            if (!(allMovies.get(random).equals(movie))) {
+            if (!allMovies.get(random).equals(movie)) {
                 return allMovies.get(random);
             }
         }
     }
+
+    @Override
+    public Movie getRandomMovieNotFromDirector(Director director) {
+        List<Movie> movies = movieRepository.findMoviesByDirectorIsNot(director);
+        int random = (int)(Math.random() * movies.size());
+        return movies.get(random);
+    }
+
 
     @Override
     public Movie getRandomMovieFromDirector(Director director) {

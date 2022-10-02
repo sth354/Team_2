@@ -12,6 +12,8 @@ public interface MovieService {
 
     Movie getRandomMovie(Movie movie);
 
+    Movie getRandomMovieNotFromDirector(Director director);
+
     Movie getRandomMovieFromDirector(Director director);
 
 }
