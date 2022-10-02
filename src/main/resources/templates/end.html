@@ -6,12 +6,14 @@
     <title> Game Over </title>
 </head>
     <body>
-        <h1 class="page-title"> Game Over </h1>
-        <div class="main-container">
-            <div class="menu">
-                <div class="menu-item">
-                    <p> Your score was: <span th:text="${score}">your score</span> </p>
-                    <p> <a href="/">Return to main menu</a> </p>
+        <div class="wrapper">
+            <h1 class="page-title"> Game Over </h1>
+            <div class="main-container">
+                <div class="menu">
+                    <div class="menu-item">
+                        <p> Your score was: <span th:text="${score}">your score</span> </p>
+                        <div class="button"><a href="/">Main menu</a></div>
+                    </div>
                 </div>
             </div>
         </div>
