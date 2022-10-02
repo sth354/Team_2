@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 @Controller
 public class GameController {
@@ -37,13 +38,18 @@ public class GameController {
         }
 
         director = directorService.getRandomDirector();
-
         Movie movie = movieService.getRandomMovieFromDirector(director);
+        Movie randomMovie = movieService.getRandomMovieNotFromDirector(director);
+
+        ArrayList<Movie> movies = new ArrayList<>();
+        movies.add(movie);
+        movies.add(randomMovie);
+        Collections.shuffle(movies);
 
         model.addAttribute("lives",lives);
         model.addAttribute("director", director);
-        model.addAttribute("movie", movie);
-        model.addAttribute("randomMovie", movieService.getRandomMovieNotFromDirector(director));
+        model.addAttribute("movie1", movies.get(0));
+        model.addAttribute("movie2", movies.get(1));
         model.addAttribute("lives",lives);
         model.addAttribute("score",score);
         // make game... xD
