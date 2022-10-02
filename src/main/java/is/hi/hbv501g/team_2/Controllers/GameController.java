@@ -33,7 +33,7 @@ public class GameController {
 
     @RequestMapping("/game")
     public String gamePage(Model model) {
-        if (lives == 0) {
+        if (lives <= 0) {
             return endGame(model);
         }
 
@@ -68,9 +68,9 @@ public class GameController {
 
     @RequestMapping(value = "/end", method = RequestMethod.GET)
     private String endGame(Model model) {
+        model.addAttribute("score",score);
         lives = 3;
         score = 0;
-        model.addAttribute("score",score);
         return "end";
     }
 }
