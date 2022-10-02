@@ -54,7 +54,7 @@ public class GameController {
     @RequestMapping(value = "/checkAnswer", method = RequestMethod.GET)
     public String checkAnswer(@RequestParam String action, Model model) {
         System.out.println(action);
-        if (director.getMovies().contains(action)) {
+        if (director.contains(action)) {
             score++;
         }
         else {
@@ -66,6 +66,7 @@ public class GameController {
     @RequestMapping(value = "/end", method = RequestMethod.GET)
     private String endGame(Model model) {
         lives = 3;
+        score = 0;
         model.addAttribute("score",score);
         return "end";
     }

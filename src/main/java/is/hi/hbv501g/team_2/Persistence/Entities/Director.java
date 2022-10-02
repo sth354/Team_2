@@ -54,6 +54,13 @@ public class Director {
         return name;
     }
 
-
+    public boolean contains(String toString) {
+        for(int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).toString().equals(toString)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
