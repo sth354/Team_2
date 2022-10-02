@@ -23,12 +23,18 @@ public class GameController {
 
     private Director director;
 
+
     @Autowired
     public GameController(DirectorService directorService, MovieService movieService) {
         this.directorService = directorService;
         this.movieService = movieService;
         lives = 3;
         score = 0;
+    }
+
+    @RequestMapping("/")
+    public String mainMenu() {
+        return "main";
     }
 
     @RequestMapping("/game")
