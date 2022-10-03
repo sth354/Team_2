@@ -16,7 +16,7 @@ public class Director {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "director", cascade =  CascadeType.ALL)
     private List<Movie> movies;
 
-    public Director() {
+    protected Director() {
     }
 
     public Director(String name, List<Movie> movies) {

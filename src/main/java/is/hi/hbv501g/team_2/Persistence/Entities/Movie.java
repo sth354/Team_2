@@ -15,7 +15,7 @@ public class Movie {
     @ManyToOne(fetch = FetchType.LAZY)
     private Director director;
 
-    public Movie() {
+    protected Movie() {
     }
 
     public Movie(String title, Integer year, Director director) {
