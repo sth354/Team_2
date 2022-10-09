@@ -1,15 +1,19 @@
 package is.hi.hbv501g.team_2.Persistence.Entities;
 
-//@Entity
-//@Table(name = "users")
-public class User {
-    // Will be implemented later
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ID;
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long ID;
     private String userName;
     private String password;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "director", cascade =  CascadeType.ALL)
+    private List<Score> scores;
 
     protected User() {
     }
