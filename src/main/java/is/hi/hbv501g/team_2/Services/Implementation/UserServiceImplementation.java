@@ -30,11 +30,17 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User findByUserName(String userName) {
-        return userRepository.findByUserName(userName);
+        return userRepository.findByUsername(userName);
     }
 
     @Override
-    public boolean checkUser(User user) {
-        return user.equals(userRepository.findUserByID(user.getID()));
+    public User login(User user) {
+        User doesExist = findByUserName(user.getUsername());
+        if(doesExist != null){
+            if(doesExist.getPassword().equals(user.getPassword())){
+                return doesExist;
+            }
+        }
+        return null;
     }
 }
