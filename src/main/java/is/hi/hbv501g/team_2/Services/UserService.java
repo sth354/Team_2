@@ -8,5 +8,5 @@ public interface UserService {
     User save(User user);
     List<User> findAll();
     User findByUserName(String userName);
-    boolean checkUser(User user);
+    User login(User user);
 }

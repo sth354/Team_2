@@ -12,4 +12,6 @@ public class ScoreController {
     public ScoreController(ScoreboardService scoreboardService) {
         this.scoreboardService = scoreboardService;
     }
+
+
 }
