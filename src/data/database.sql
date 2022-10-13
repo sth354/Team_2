@@ -5,8 +5,8 @@
 
 BEGIN;
 
-    DROP * FROM directors;
-    DROP * FROM movies;
+    TRUNCATE TABLE directors;
+    TRUNCATE TABLE movies;
 
     INSERT INTO directors(id,name) VALUES(1,'Steven Spielberg');
     INSERT INTO directors(id,name) VALUES(2,'Christopher Nolan');
