@@ -2,7 +2,7 @@
 -- \c gamedb
 -- navigate to Team_2 using \cd, (\! dir to see current directory or \! ls for linux)
 -- \i src/data/database.sql
-
+-- á windows : \i src//data//database.sql
 BEGIN;
 
     TRUNCATE TABLE directors CASCADE;
