@@ -44,19 +44,19 @@ BEGIN;
     INSERT INTO movies(id,title,year,director_id) VALUES(13,'Titanic',1997,7);
     INSERT INTO movies(id,title,year,director_id) VALUES(14,'Avatar',2009,7);
 
-    INSERT INTO movies(id,title,year,director_id) VALUES(14,'2001: A Space Odyssey',1968,8);
-    INSERT INTO movies(id,title,year,director_id) VALUES(15,'The Shining',1980,8);
+    INSERT INTO movies(id,title,year,director_id) VALUES(15,'2001: A Space Odyssey',1968,8);
+    INSERT INTO movies(id,title,year,director_id) VALUES(16,'The Shining',1980,8);
 
-    INSERT INTO movies(id,title,year,director_id) VALUES(15,'The Departed',2006,9);
-    INSERT INTO movies(id,title,year,director_id) VALUES(16,'Goodfellas',1990,9);
+    INSERT INTO movies(id,title,year,director_id) VALUES(17,'The Departed',2006,9);
+    INSERT INTO movies(id,title,year,director_id) VALUES(18,'Goodfellas',1990,9);
 
-    INSERT INTO movies(id,title,year,director_id) VALUES(16,'Psycho',1960,10);
-    INSERT INTO movies(id,title,year,director_id) VALUES(17,'Vertigo',1958,10);
+    INSERT INTO movies(id,title,year,director_id) VALUES(19,'Psycho',1960,10);
+    INSERT INTO movies(id,title,year,director_id) VALUES(20,'Vertigo',1958,10);
 
-    INSERT INTO movies(id,title,year,director_id) VALUES(17,'The Godfather',1972,11);
-    INSERT INTO movies(id,title,year,director_id) VALUES(18,'The Godfather: Part II',1974,11);
-    INSERT INTO movies(id,title,year,director_id) VALUES(19,'The Godfather: Part III',1990,11);
+    INSERT INTO movies(id,title,year,director_id) VALUES(21,'The Godfather',1972,11);
+    INSERT INTO movies(id,title,year,director_id) VALUES(22,'The Godfather: Part II',1974,11);
+    INSERT INTO movies(id,title,year,director_id) VALUES(23,'The Godfather: Part III',1990,11);
 
-    INSERT INTO movies(id,title,year,director_id) VALUES(18,'Star Wars',1977,12);
+    INSERT INTO movies(id,title,year,director_id) VALUES(24,'Star Wars',1977,12);
 
 END;
