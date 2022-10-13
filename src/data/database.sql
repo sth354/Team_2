@@ -1,3 +1,8 @@
+-- psql -U postgres
+-- \c gamedb
+-- navigate to Team_2 using \cd, (\! dir to see current directory or \! ls for linux)
+-- \i src/data/database.sql
+
 INSERT INTO directors(id,name) VALUES(1,'Steven Spielberg');
 INSERT INTO directors(id,name) VALUES(2,'Christopher Nolan');
 INSERT INTO directors(id,name) VALUES(3,'Tim Burton');
