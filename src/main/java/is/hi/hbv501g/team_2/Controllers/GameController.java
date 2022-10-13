@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,11 +79,13 @@ public class GameController {
     }
 
     @RequestMapping(value = "/checkAnswer", method = RequestMethod.GET)
-    public String checkAnswer(@RequestParam String action, Model model) {
+    public String checkAnswer(@RequestParam String action, Model model, RedirectAttributes redirAttrs) {
         if (director.contains(action)) {
+            redirAttrs.addFlashAttribute("success", "correct!");
             score++;
         }
         else {
+            redirAttrs.addFlashAttribute("fail", "that was incorrect :(");
             lives--;
         }
         return "redirect:/game";

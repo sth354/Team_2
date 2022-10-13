@@ -11,6 +11,8 @@
         <h2 class = "nav"> <a href="main.html"> Main menu</a>  </h2>
         <div class="main-container">
             <div class="menu">
+                <div class = "alert " role="alert" th:text="${success}" th:if="${success}"></div>
+                <div class = "alert" role="alert" th:text="${fail}" th:if="${fail}"></div>
                 <div class="menu-item">
                     <p>
                         Lives: <span th:text="${lives}"></span> Score: <span th:text="${score}"></span>

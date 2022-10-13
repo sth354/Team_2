@@ -12,6 +12,15 @@ a {
     display: grid;
 }
 
+/* eg kann ekki css, afh virkar þetta ekki -axel*/
+.alert {
+    padding: 20px;
+    background-color: #409be3;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
 .wrapper > .page-title {
     justify-self: center;
 }
