@@ -28,8 +28,24 @@ public class GameController {
     public GameController(DirectorService directorService, MovieService movieService) {
         this.directorService = directorService;
         this.movieService = movieService;
-        lives = 3;
-        score = 0;
+        this.score = 0;
+    }
+
+    @RequestMapping( "/hard")
+    public String getLivesHard(Model model){
+        this.lives = 1;
+        return "redirect:/game";
+    }
+    @RequestMapping( "/medium")
+    public String getLivesMedium(Model model){
+        this.lives = 4;
+        return "redirect:/game";
+    }
+
+    @RequestMapping( "/easy")
+    public String getLivesEasy(Model model){
+        this.lives = 8;
+        return "redirect:/game";
     }
 
     @RequestMapping("/")
