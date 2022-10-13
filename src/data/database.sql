@@ -5,8 +5,8 @@
 
 BEGIN;
 
-    TRUNCATE TABLE directors;
-    TRUNCATE TABLE movies;
+    TRUNCATE TABLE directors CASCADE;
+    TRUNCATE TABLE movies CASCADE;
 
     INSERT INTO directors(id,name) VALUES(1,'Steven Spielberg');
     INSERT INTO directors(id,name) VALUES(2,'Christopher Nolan');
