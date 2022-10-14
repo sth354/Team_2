@@ -61,6 +61,11 @@ public class GameController {
         return "main";
     }
 
+    @RequestMapping("/difficulty")
+    public String difficultyMenu(Model model) {
+        return "difficulty";
+    }
+
 
     private Director addRandomDirectorToModel(Model model) {
         director = directorService.getRandomDirector();
