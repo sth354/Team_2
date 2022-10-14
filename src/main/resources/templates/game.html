@@ -8,7 +8,7 @@
 <body>
     <div class="wrapper">
         <h1 class="page-title">The Director Guessing Game!</h1>
-        <h2 class = "nav"> <a href="main.html"> Main menu</a>  </h2>
+        <h2 class = "nav"> <a th:href="@{/}"> Main menu</a>  </h2>
         <div class="main-container">
             <div class="menu">
                 <div class = "alert " role="alert" th:text="${success}" th:if="${success}"></div>
