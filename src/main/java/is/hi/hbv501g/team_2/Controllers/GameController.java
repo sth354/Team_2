@@ -22,6 +22,8 @@ public class GameController {
     private int lives;
     private int score;
 
+    private int difficulty;
+
     private Director director;
 
 
@@ -35,17 +37,20 @@ public class GameController {
     @RequestMapping( "/hard")
     public String getLivesHard(Model model){
         this.lives = 1;
+        this.difficulty = 2;
         return "redirect:/game";
     }
     @RequestMapping( "/medium")
     public String getLivesMedium(Model model){
         this.lives = 4;
+        this.difficulty = 4;
         return "redirect:/game";
     }
 
     @RequestMapping( "/easy")
     public String getLivesEasy(Model model){
         this.lives = 8;
+        this.difficulty= 8;
         return "redirect:/game";
     }
 
@@ -54,24 +59,33 @@ public class GameController {
         return "main";
     }
 
+
+    private Director addRandomDirectorToModel(Model model) {
+        director = directorService.getRandomDirector();
+        model.addAttribute("director", director);
+        return director;
+    }
+
+    private void setDifficulty(Model model){
+        ArrayList<Movie> movies = new ArrayList<>();
+        Director director = addRandomDirectorToModel(model);
+        Movie correctMovie = movieService.getRandomMovieFromDirector(director);
+        for (int i = 0; i < this.difficulty - 1; i++){
+            movies.add(movieService.getRandomMovieNotFromDirector(director));
+        }
+        movies.add(correctMovie);
+        Collections.shuffle(movies);
+        model.addAttribute("movies",movies);
+
+    }
     @RequestMapping("/game")
     public String gamePage(Model model) {
         if (lives <= 0) {
             return endGame(model);
         }
 
-        director = directorService.getRandomDirector();
-        Movie movie = movieService.getRandomMovieFromDirector(director);
-        Movie randomMovie = movieService.getRandomMovieNotFromDirector(director);
+        setDifficulty(model);
 
-        ArrayList<Movie> movies = new ArrayList<>();
-        movies.add(movie);
-        movies.add(randomMovie);
-        Collections.shuffle(movies);
-
-        model.addAttribute("director", director);
-        model.addAttribute("movie1", movies.get(0));
-        model.addAttribute("movie2", movies.get(1));
         model.addAttribute("lives",lives);
         model.addAttribute("score",score);
 
