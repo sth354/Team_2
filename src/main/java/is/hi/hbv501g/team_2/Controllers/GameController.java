@@ -26,6 +26,8 @@ public class GameController {
 
     private Director director;
 
+    private Movie movieNotByDirector;
+
 
     @Autowired
     public GameController(DirectorService directorService, MovieService movieService) {
@@ -70,14 +72,20 @@ public class GameController {
         ArrayList<Movie> movies = new ArrayList<>();
         Director director = addRandomDirectorToModel(model);
         Movie correctMovie = movieService.getRandomMovieFromDirector(director);
-        for (int i = 0; i < this.difficulty - 1; i++){
-            movies.add(movieService.getRandomMovieNotFromDirector(director));
+        for (int i = 0; i < this.difficulty - 1; i++) {
+            while (true) {
+                movieNotByDirector = movieService.getRandomMovieNotFromDirector(director);
+                if (!(movies.contains(movieNotByDirector))) {
+                    movies.add(movieNotByDirector);
+                    break;
+                }
+            }
         }
         movies.add(correctMovie);
         Collections.shuffle(movies);
         model.addAttribute("movies",movies);
-
     }
+
     @RequestMapping("/game")
     public String gamePage(Model model) {
         if (lives <= 0) {
