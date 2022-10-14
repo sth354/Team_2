@@ -37,7 +37,7 @@ public class GameController {
     @RequestMapping( "/hard")
     public String getLivesHard(Model model){
         this.lives = 1;
-        this.difficulty = 2;
+        this.difficulty = 7;
         return "redirect:/game";
     }
     @RequestMapping( "/medium")
@@ -50,7 +50,7 @@ public class GameController {
     @RequestMapping( "/easy")
     public String getLivesEasy(Model model){
         this.lives = 8;
-        this.difficulty= 8;
+        this.difficulty= 3;
         return "redirect:/game";
     }
 
@@ -83,7 +83,7 @@ public class GameController {
         if (lives <= 0) {
             return endGame(model);
         }
-
+        //TODO: delete duplicate values in movies array
         setDifficulty(model);
 
         model.addAttribute("lives",lives);
