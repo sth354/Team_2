@@ -11,8 +11,7 @@ a {
 .wrapper {
     display: grid;
 }
-
-/* eg kann ekki css, afh virkar þetta ekki -axel*/
+/* þetta er alveg scuffed má endilega breyta útliti*/
 .alert {
     padding: 20px;
     background-color: #409be3;
