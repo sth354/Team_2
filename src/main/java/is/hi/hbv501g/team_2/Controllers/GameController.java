@@ -26,8 +26,6 @@ public class GameController {
 
     private Director director;
 
-    private Movie movieNotByDirector;
-
 
     @Autowired
     public GameController(DirectorService directorService, MovieService movieService) {
@@ -39,7 +37,7 @@ public class GameController {
     @RequestMapping( "/hard")
     public String getLivesHard(Model model){
         this.lives = 1;
-        this.difficulty = 8;
+        this.difficulty = 7;
         return "redirect:/game";
     }
     @RequestMapping( "/medium")
@@ -52,7 +50,7 @@ public class GameController {
     @RequestMapping( "/easy")
     public String getLivesEasy(Model model){
         this.lives = 8;
-        this.difficulty= 2;
+        this.difficulty= 3;
         return "redirect:/game";
     }
 
@@ -72,16 +70,9 @@ public class GameController {
         ArrayList<Movie> movies = new ArrayList<>();
         Director director = addRandomDirectorToModel(model);
         Movie correctMovie = movieService.getRandomMovieFromDirector(director);
-        for (int i = 0; i < this.difficulty - 1; i++) {
-            while (true) {
-                movieNotByDirector = movieService.getRandomMovieNotFromDirector(director);
-                if (!(movies.contains(movieNotByDirector))) {
-                    movies.add(movieNotByDirector);
-                    break;
-                }
-            }
+        for (int i = 0; i < this.difficulty - 1; i++){
+            movies.add(movieService.getRandomMovieNotFromDirector(director));
         }
-
         movies.add(correctMovie);
         Collections.shuffle(movies);
         model.addAttribute("movies",movies);
@@ -92,7 +83,7 @@ public class GameController {
         if (lives <= 0) {
             return endGame(model);
         }
-
+        //TODO: delete duplicate values in movies array
         setDifficulty(model);
 
         model.addAttribute("lives",lives);
