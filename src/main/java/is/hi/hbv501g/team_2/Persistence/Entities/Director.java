@@ -1,7 +1,6 @@
 package is.hi.hbv501g.team_2.Persistence.Entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
