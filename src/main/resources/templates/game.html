@@ -8,8 +8,11 @@
 <body>
     <div class="wrapper">
         <h1 class="page-title">The Director Guessing Game!</h1>
+        <h2 class = "nav"> <a th:href="@{/}"> Main menu</a>  </h2>
         <div class="main-container">
             <div class="menu">
+                <div class = "alert " role="alert" th:text="${success}" th:if="${success}"></div>
+                <div class = "alert" role="alert" th:text="${fail}" th:if="${fail}"></div>
                 <div class="menu-item">
                     <p>
                         Lives: <span th:text="${lives}"></span> Score: <span th:text="${score}"></span>
@@ -19,8 +22,9 @@
                 </div>
                 <div class="menu-item">
                     <form action="#" th:action="@{/checkAnswer}" method="GET">
-                        <input type="submit" name="action" th:value="${movie1}"/>
-                        <input type="submit" name="action" th:value="${movie2}"/>
+                        <tr th:each="movie: ${movies}">
+                            <input type="submit" name="action" th:value="${movie}"/>
+                        </tr>
                     </form>
                 </div>
             </div>

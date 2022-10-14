@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,15 +22,38 @@ public class GameController {
     private int lives;
     private int score;
 
+    private int difficulty;
+
     private Director director;
+
+    private Movie movieNotByDirector;
 
 
     @Autowired
     public GameController(DirectorService directorService, MovieService movieService) {
         this.directorService = directorService;
         this.movieService = movieService;
-        lives = 3;
-        score = 0;
+        this.score = 0;
+    }
+
+    @RequestMapping( "/hard")
+    public String getLivesHard(Model model){
+        this.lives = 1;
+        this.difficulty = 7;
+        return "redirect:/game";
+    }
+    @RequestMapping( "/medium")
+    public String getLivesMedium(Model model){
+        this.lives = 4;
+        this.difficulty = 4;
+        return "redirect:/game";
+    }
+
+    @RequestMapping( "/easy")
+    public String getLivesEasy(Model model){
+        this.lives = 8;
+        this.difficulty= 3;
+        return "redirect:/game";
     }
 
     @RequestMapping("/")
@@ -37,24 +61,44 @@ public class GameController {
         return "main";
     }
 
+    @RequestMapping("/difficulty")
+    public String difficultyMenu(Model model) {
+        return "difficulty";
+    }
+
+
+    private Director addRandomDirectorToModel(Model model) {
+        director = directorService.getRandomDirector();
+        model.addAttribute("director", director);
+        return director;
+    }
+
+    private void setDifficulty(Model model){
+        ArrayList<Movie> movies = new ArrayList<>();
+        Director director = addRandomDirectorToModel(model);
+        Movie correctMovie = movieService.getRandomMovieFromDirector(director);
+        for (int i = 0; i < this.difficulty - 1; i++) {
+            while (true) {
+                movieNotByDirector = movieService.getRandomMovieNotFromDirector(director);
+                if (!(movies.contains(movieNotByDirector))) {
+                    movies.add(movieNotByDirector);
+                    break;
+                }
+            }
+        }
+        movies.add(correctMovie);
+        Collections.shuffle(movies);
+        model.addAttribute("movies",movies);
+    }
+
     @RequestMapping("/game")
     public String gamePage(Model model) {
         if (lives <= 0) {
             return endGame(model);
         }
+        //TODO: delete duplicate values in movies array
+        setDifficulty(model);
 
-        director = directorService.getRandomDirector();
-        Movie movie = movieService.getRandomMovieFromDirector(director);
-        Movie randomMovie = movieService.getRandomMovieNotFromDirector(director);
-
-        ArrayList<Movie> movies = new ArrayList<>();
-        movies.add(movie);
-        movies.add(randomMovie);
-        Collections.shuffle(movies);
-
-        model.addAttribute("director", director);
-        model.addAttribute("movie1", movies.get(0));
-        model.addAttribute("movie2", movies.get(1));
         model.addAttribute("lives",lives);
         model.addAttribute("score",score);
 
@@ -62,11 +106,13 @@ public class GameController {
     }
 
     @RequestMapping(value = "/checkAnswer", method = RequestMethod.GET)
-    public String checkAnswer(@RequestParam String action, Model model) {
+    public String checkAnswer(@RequestParam String action, Model model, RedirectAttributes redirAttrs) {
         if (director.contains(action)) {
+            redirAttrs.addFlashAttribute("success", "correct!");
             score++;
         }
         else {
+            redirAttrs.addFlashAttribute("fail", "that was incorrect :(");
             lives--;
         }
         return "redirect:/game";
