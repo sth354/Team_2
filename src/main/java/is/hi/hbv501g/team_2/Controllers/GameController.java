@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class GameController {
@@ -74,18 +76,14 @@ public class GameController {
     }
 
     private void setDifficulty(Model model){
-        ArrayList<Movie> movies = new ArrayList<>();
+        HashMap<Movie,Movie> moviesMap = new HashMap<>();
         Director director = addRandomDirectorToModel(model);
         Movie correctMovie = movieService.getRandomMovieFromDirector(director);
-        for (int i = 0; i < this.difficulty - 1; i++) {
-            while (true) {
-                movieNotByDirector = movieService.getRandomMovieNotFromDirector(director);
-                if (!(movies.contains(movieNotByDirector))) {
-                    movies.add(movieNotByDirector);
-                    break;
-                }
-            }
+        while (moviesMap.size() < this.difficulty - 1) {
+            movieNotByDirector = movieService.getRandomMovieNotFromDirector(director);
+            moviesMap.putIfAbsent(movieNotByDirector,movieNotByDirector);
         }
+        List<Movie> movies = new ArrayList<Movie>(moviesMap.values());
         movies.add(correctMovie);
         Collections.shuffle(movies);
         model.addAttribute("movies",movies);
