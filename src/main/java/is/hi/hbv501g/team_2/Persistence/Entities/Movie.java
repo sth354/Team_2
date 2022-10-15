@@ -57,7 +57,7 @@ public class Movie {
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
         if (this.getClass() != o.getClass()) return false;
@@ -65,10 +65,6 @@ public class Movie {
         return ID == that.ID
                 && (title.equals(that.title)
                 && year.equals(that.year));
-    }
-
-    public boolean equals(Movie movie) {
-        return movie.getTitle().equals(title);
     }
 
 }
