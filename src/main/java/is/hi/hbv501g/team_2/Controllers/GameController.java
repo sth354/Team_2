@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-
+import java.util.*;
 @Controller
 public class GameController {
     private DirectorService directorService;
@@ -76,16 +72,21 @@ public class GameController {
     }
 
     private void setDifficulty(Model model){
-        HashMap<Movie,Movie> moviesMap = new HashMap<>();
+        Set<Movie> movieSet = new HashSet<>();
         Director director = addRandomDirectorToModel(model);
-        Movie correctMovie = movieService.getRandomMovieFromDirector(director);
-        while (moviesMap.size() < this.difficulty - 1) {
-            movieNotByDirector = movieService.getRandomMovieNotFromDirector(director);
-            moviesMap.putIfAbsent(movieNotByDirector,movieNotByDirector);
-        }
-        List<Movie> movies = new ArrayList<Movie>(moviesMap.values());
-        movies.add(correctMovie);
+
+
+        // Temporary extra difficulty
+        Integer numMoviesFromDirector = (int)(Math.random() * 2 + 1);
+        Integer numMoviesNotFromDirector = this.difficulty - numMoviesFromDirector;
+
+        List<Movie> moviesFromDirector = movieService.getMoviesFromDirector(director, numMoviesFromDirector);
+        List<Movie> moviesNotFromDirector = movieService.getMoviesNotFromDirector(director, numMoviesNotFromDirector);
+
+        ArrayList<Movie> movies = new ArrayList<>(moviesFromDirector);
+        movies.addAll(moviesNotFromDirector);
         Collections.shuffle(movies);
+
         model.addAttribute("movies",movies);
     }
 
