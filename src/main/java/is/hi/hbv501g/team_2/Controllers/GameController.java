@@ -95,7 +95,7 @@ public class GameController {
         if (lives <= 0) {
             return endGame(model);
         }
-        //TODO: delete duplicate values in movies array
+
         setDifficulty(model);
 
         model.addAttribute("lives",lives);
