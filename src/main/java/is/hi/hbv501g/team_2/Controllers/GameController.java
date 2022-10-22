@@ -78,9 +78,10 @@ public class GameController {
 
         // Todo: Temporary extra difficulty
         Integer numMoviesFromDirector = (int)(Math.random() * 2 + 1);
-        Integer numMoviesNotFromDirector = this.difficulty - numMoviesFromDirector;
-
         List<Movie> moviesFromDirector = movieService.getMoviesFromDirector(director, numMoviesFromDirector);
+
+        // If director does not have numMoviesFromDirector movies, we use more random movies
+        Integer numMoviesNotFromDirector = this.difficulty - moviesFromDirector.size();
         List<Movie> moviesNotFromDirector = movieService.getMoviesNotFromDirector(director, numMoviesNotFromDirector);
 
         ArrayList<Movie> movies = new ArrayList<>(moviesFromDirector);
@@ -116,9 +117,9 @@ public class GameController {
         return "redirect:/game";
     }
 
-    @RequestMapping(value = "/end", method = RequestMethod.GET)
+    @RequestMapping(value = "/end")
     private String endGame(Model model) {
-        model.addAttribute("finalScore", model.getAttribute("score"));
+        model.addAttribute("score", score);
         return "end";
     }
 }

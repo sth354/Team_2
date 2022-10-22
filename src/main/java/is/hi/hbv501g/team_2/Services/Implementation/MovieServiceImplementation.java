@@ -58,7 +58,7 @@ public class MovieServiceImplementation implements MovieService {
         List<Movie> randomMovies = new ArrayList<>();
         List<Movie> allMovies = movieRepository.findMoviesByDirectorIsNot(director);
 
-        for (int i = 0; i < numberOfMovies || i < randomMovies.size(); i++) {
+        for (int i = 0; i < numberOfMovies && i < allMovies.size(); i++) {
             randomMovies.add(allMovies.get(indices.get(i)));
         }
 
@@ -68,12 +68,14 @@ public class MovieServiceImplementation implements MovieService {
 
     @Override
     public List<Movie> getMoviesFromDirector(Director director, Integer numberOfMovies) {
-        List<Integer> indices = getRandomPermutationRange(numberOfMovies);
-
-        List<Movie> randomMovies = new ArrayList<>();
         List<Movie> allMovies = director.getMovies();
 
-        for (int i = 0; i < numberOfMovies || i < randomMovies.size(); i++) {
+        Integer numMovies = Math.min(numberOfMovies, allMovies.size());
+
+        List<Integer> indices = getRandomPermutationRange(numMovies);
+
+        List<Movie> randomMovies = new ArrayList<>();
+        for (int i = 0; i < numMovies; i++) {
             randomMovies.add(allMovies.get(indices.get(i)));
         }
 
