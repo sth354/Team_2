@@ -31,6 +31,20 @@ public class MovieServiceImplementation implements MovieService {
         return movieRepository.findAll();
     }
 
+
+    /**
+     * @param n The upper limit of the range
+     * @return Random permutation of [0, 1, ..., n-1]
+     */
+    private List<Integer> getRandomPermutationRange(Integer n) {
+        List<Integer> permutation = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            permutation.add(i);
+        }
+        Collections.shuffle(permutation);
+        return permutation;
+    }
+
     /**
      * Returns a list of size numberOfMovies containing movies that are not from the given director
      * @param director The director to exclude
@@ -39,9 +53,7 @@ public class MovieServiceImplementation implements MovieService {
      */
     @Override
     public List<Movie> getMoviesNotFromDirector(Director director, Integer numberOfMovies) {
-        List<Integer> indices = new ArrayList<>();
-        for (int i = 0; i < numberOfMovies; i++) indices.add(i);
-        Collections.shuffle(indices);
+        List<Integer> indices = getRandomPermutationRange(numberOfMovies);
 
         List<Movie> randomMovies = new ArrayList<>();
         List<Movie> allMovies = movieRepository.findMoviesByDirectorIsNot(director);
@@ -56,9 +68,7 @@ public class MovieServiceImplementation implements MovieService {
 
     @Override
     public List<Movie> getMoviesFromDirector(Director director, Integer numberOfMovies) {
-        List<Integer> indices = new ArrayList<>();
-        for (int i = 0; i < numberOfMovies; i++) indices.add(i);
-        Collections.shuffle(indices);
+        List<Integer> indices = getRandomPermutationRange(numberOfMovies);
 
         List<Movie> randomMovies = new ArrayList<>();
         List<Movie> allMovies = director.getMovies();

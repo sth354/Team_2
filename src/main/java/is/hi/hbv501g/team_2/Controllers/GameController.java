@@ -31,19 +31,20 @@ public class GameController {
     public GameController(DirectorService directorService, MovieService movieService) {
         this.directorService = directorService;
         this.movieService = movieService;
-        this.score = 0;
     }
 
     @RequestMapping( "/hard")
     public String getLivesHard(Model model){
         this.lives = 1;
         this.difficulty = 7;
+        this.score = 0;
         return "redirect:/game";
     }
     @RequestMapping( "/medium")
     public String getLivesMedium(Model model){
         this.lives = 4;
         this.difficulty = 4;
+        this.score = 0;
         return "redirect:/game";
     }
 
@@ -51,6 +52,7 @@ public class GameController {
     public String getLivesEasy(Model model){
         this.lives = 8;
         this.difficulty= 3;
+        this.score = 0;
         return "redirect:/game";
     }
 
@@ -72,11 +74,9 @@ public class GameController {
     }
 
     private void setDifficulty(Model model){
-        Set<Movie> movieSet = new HashSet<>();
         Director director = addRandomDirectorToModel(model);
 
-
-        // Temporary extra difficulty
+        // Todo: Temporary extra difficulty
         Integer numMoviesFromDirector = (int)(Math.random() * 2 + 1);
         Integer numMoviesNotFromDirector = this.difficulty - numMoviesFromDirector;
 
@@ -95,7 +95,6 @@ public class GameController {
         if (lives <= 0) {
             return endGame(model);
         }
-        //TODO: delete duplicate values in movies array
         setDifficulty(model);
 
         model.addAttribute("lives",lives);
@@ -119,9 +118,7 @@ public class GameController {
 
     @RequestMapping(value = "/end", method = RequestMethod.GET)
     private String endGame(Model model) {
-        model.addAttribute("score",score);
-        lives = 3;
-        score = 0;
+        model.addAttribute("finalScore", model.getAttribute("score"));
         return "end";
     }
 }

@@ -32,7 +32,7 @@ a {
 .menu {
     display: grid;
     background-color: #06168f;
-    height: 100vh;
+    height: 50vh;
     color: white;
     font-size: 40px;
     width: 90%;
