@@ -15,7 +15,7 @@ public class Movie {
     @ManyToOne(fetch = FetchType.LAZY)
     private Director director;
 
-    public Movie() {
+    protected Movie() {
     }
 
     public Movie(String title, Integer year, Director director) {
@@ -51,8 +51,20 @@ public class Movie {
     @Override
     public String toString() { return title + " (" + year + ")"; }
 
-    public boolean equals(Movie movie) {
-        return movie.getTitle().equals(title);
+    @Override
+    public int hashCode(){
+        return (int) (getID() ^ (getID() >>> 32));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (this.getClass() != o.getClass()) return false;
+        Movie that = (Movie) o;
+        return ID == that.ID
+                && (title.equals(that.title)
+                && year.equals(that.year));
     }
 
 }

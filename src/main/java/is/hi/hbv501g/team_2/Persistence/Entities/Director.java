@@ -1,7 +1,6 @@
 package is.hi.hbv501g.team_2.Persistence.Entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +15,7 @@ public class Director {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "director", cascade =  CascadeType.ALL)
     private List<Movie> movies;
 
-    public Director() {
+    protected Director() {
     }
 
     public Director(String name, List<Movie> movies) {
@@ -53,6 +52,8 @@ public class Director {
     public String toString() {
         return name;
     }
+
+
 
     public boolean contains(String toString) {
         for(int i = 0; i < movies.size(); i++) {

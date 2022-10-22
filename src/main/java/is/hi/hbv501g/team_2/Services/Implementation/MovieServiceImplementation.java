@@ -7,7 +7,7 @@ import is.hi.hbv501g.team_2.Services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MovieServiceImplementation implements MovieService {
@@ -31,19 +31,55 @@ public class MovieServiceImplementation implements MovieService {
         return movieRepository.findAll();
     }
 
+
+    /**
+     * @param n The upper limit of the range
+     * @return Random permutation of [0, 1, ..., n-1]
+     */
+    private List<Integer> getRandomPermutationRange(Integer n) {
+        List<Integer> permutation = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            permutation.add(i);
+        }
+        Collections.shuffle(permutation);
+        return permutation;
+    }
+
+    /**
+     * Returns a list of size numberOfMovies containing movies that are not from the given director
+     * @param director The director to exclude
+     * @param numberOfMovies The number of movies to return
+     * @return List<Movie>
+     */
     @Override
-    public Movie getRandomMovieNotFromDirector(Director director) {
-        List<Movie> movies = movieRepository.findMoviesByDirectorIsNot(director);
-        int random = (int)(Math.random() * movies.size());
-        return movies.get(random);
+    public List<Movie> getMoviesNotFromDirector(Director director, Integer numberOfMovies) {
+        List<Integer> indices = getRandomPermutationRange(numberOfMovies);
+
+        List<Movie> randomMovies = new ArrayList<>();
+        List<Movie> allMovies = movieRepository.findMoviesByDirectorIsNot(director);
+
+        for (int i = 0; i < numberOfMovies && i < allMovies.size(); i++) {
+            randomMovies.add(allMovies.get(indices.get(i)));
+        }
+
+        return randomMovies;
     }
 
 
     @Override
-    public Movie getRandomMovieFromDirector(Director director) {
-        List<Movie> movies = director.getMovies();
-        int random = (int)(Math.random() * movies.size());
-        return movies.get(random);
+    public List<Movie> getMoviesFromDirector(Director director, Integer numberOfMovies) {
+        List<Movie> allMovies = director.getMovies();
+
+        Integer numMovies = Math.min(numberOfMovies, allMovies.size());
+
+        List<Integer> indices = getRandomPermutationRange(numMovies);
+
+        List<Movie> randomMovies = new ArrayList<>();
+        for (int i = 0; i < numMovies; i++) {
+            randomMovies.add(allMovies.get(indices.get(i)));
+        }
+
+        return randomMovies;
     }
 
 }
