@@ -76,7 +76,7 @@ public class GameController {
     private void setDifficulty(Model model){
         Director director = addRandomDirectorToModel(model);
 
-        // Todo: Temporary extra difficulty
+        // Todo: Temporary extra difficulty, refactor later
         Integer numMoviesFromDirector = (int)(Math.random() * 2 + 1);
         List<Movie> moviesFromDirector = movieService.getMoviesFromDirector(director, numMoviesFromDirector);
 
