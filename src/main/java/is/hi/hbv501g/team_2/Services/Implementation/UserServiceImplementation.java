@@ -34,6 +34,11 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    /**
+     * Function that checks whether login attempt matches our user database
+     * @param user The login attempt
+     * @return user if username and password match, otherwise null
+     */
     public User login(User user) {
         User doesExist = findByUserName(user.getUsername());
         if(doesExist != null){

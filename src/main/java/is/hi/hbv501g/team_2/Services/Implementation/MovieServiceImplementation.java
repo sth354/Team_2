@@ -65,7 +65,12 @@ public class MovieServiceImplementation implements MovieService {
         return randomMovies;
     }
 
-
+    /**
+     * Returns a list of size numberOfMovies containing movies that are from the given director
+     * @param director The director to exclude
+     * @param numberOfMovies The number of movies to return
+     * @return List<Movie>
+     */
     @Override
     public List<Movie> getMoviesFromDirector(Director director, Integer numberOfMovies) {
         List<Movie> allMovies = director.getMovies();
