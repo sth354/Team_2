@@ -17,9 +17,12 @@ import java.util.*;
 public class GameController {
     private DirectorService directorService;
     private MovieService movieService;
+
+    // lives are number of lives during gameplay
     private int lives;
     private int score;
 
+    // difficulty is number of movies during gameplay
     private int difficulty;
 
     private Director director;
@@ -33,6 +36,10 @@ public class GameController {
         this.movieService = movieService;
     }
 
+    /**
+     * Called when hard difficulty is selected
+     * Initializes game with hard difficulty
+     */
     @RequestMapping( "/hard")
     public String getLivesHard(Model model){
         this.lives = 1;
@@ -40,6 +47,11 @@ public class GameController {
         this.score = 0;
         return "redirect:/game";
     }
+
+    /**
+     * Called when medium difficulty is selected
+     * Initializes game with easy difficulty
+     */
     @RequestMapping( "/medium")
     public String getLivesMedium(Model model){
         this.lives = 4;
@@ -48,6 +60,10 @@ public class GameController {
         return "redirect:/game";
     }
 
+    /**
+     * Called when easy difficulty is selected
+     * Initializes game with easy difficulty
+     */
     @RequestMapping( "/easy")
     public String getLivesEasy(Model model){
         this.lives = 8;
@@ -66,7 +82,7 @@ public class GameController {
         return "difficulty";
     }
 
-
+    //Adds random director
     private Director addRandomDirectorToModel(Model model) {
         director = directorService.getRandomDirector();
         model.addAttribute("director", director);
