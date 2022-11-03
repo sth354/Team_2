@@ -19,9 +19,9 @@ public class ScoreController {
         return "viewScores";
     }
 
-    @RequestMapping("/endScreen")
+    @RequestMapping("/scoreScreen")
     public String endScreen() {
 
-       return "end";
+       return "scores";
     }
 }
