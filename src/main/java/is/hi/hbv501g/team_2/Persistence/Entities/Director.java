@@ -1,7 +1,6 @@
 package is.hi.hbv501g.team_2.Persistence.Entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,11 +15,10 @@ public class Director {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "director", cascade =  CascadeType.ALL)
     private List<Movie> movies;
 
-    public Director() {
+    protected Director() {
     }
 
     public Director(String name, List<Movie> movies) {
-        //test comment git
         this.name = name;
         this.movies = movies;
     }
@@ -44,7 +42,7 @@ public class Director {
     public List<Movie> getMovies() {
         return movies;
     }
-    //this is a commit from axel branch
+
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
@@ -54,6 +52,12 @@ public class Director {
         return name;
     }
 
+    // TODO: Start using sessions to replace this
+    /**
+     * Returns true if the movie is directed by this director
+     * @param toString the string representation of the movie
+     * @return boolean
+     */
     public boolean contains(String toString) {
         for(int i = 0; i < movies.size(); i++) {
             if (movies.get(i).toString().equals(toString)) {
