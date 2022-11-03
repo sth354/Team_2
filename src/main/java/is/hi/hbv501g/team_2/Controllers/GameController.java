@@ -17,9 +17,12 @@ import java.util.*;
 public class GameController {
     private DirectorService directorService;
     private MovieService movieService;
+
+    // lives are number of lives during gameplay
     private int lives;
     private int score;
 
+    // difficulty is number of movies during gameplay
     private int difficulty;
 
     private Director director;
@@ -31,26 +34,41 @@ public class GameController {
     public GameController(DirectorService directorService, MovieService movieService) {
         this.directorService = directorService;
         this.movieService = movieService;
-        this.score = 0;
     }
 
+    /**
+     * Called when hard difficulty is selected
+     * Initializes game with hard difficulty
+     */
     @RequestMapping( "/hard")
     public String getLivesHard(Model model){
         this.lives = 1;
         this.difficulty = 7;
+        this.score = 0;
         return "redirect:/game";
     }
+
+    /**
+     * Called when medium difficulty is selected
+     * Initializes game with easy difficulty
+     */
     @RequestMapping( "/medium")
     public String getLivesMedium(Model model){
         this.lives = 4;
         this.difficulty = 4;
+        this.score = 0;
         return "redirect:/game";
     }
 
+    /* *
+     * Called when easy difficulty is selected
+     * Initializes game with easy difficulty
+     * */
     @RequestMapping( "/easy")
     public String getLivesEasy(Model model){
         this.lives = 8;
         this.difficulty= 3;
+        this.score = 0;
         return "redirect:/game";
     }
 
@@ -64,7 +82,7 @@ public class GameController {
         return "difficulty";
     }
 
-
+    //Adds random director
     private Director addRandomDirectorToModel(Model model) {
         director = directorService.getRandomDirector();
         model.addAttribute("director", director);
@@ -72,15 +90,14 @@ public class GameController {
     }
 
     private void setDifficulty(Model model){
-        Set<Movie> movieSet = new HashSet<>();
         Director director = addRandomDirectorToModel(model);
 
-
-        // Temporary extra difficulty
+        // Todo: Temporary extra difficulty, refactor later
         Integer numMoviesFromDirector = (int)(Math.random() * 2 + 1);
-        Integer numMoviesNotFromDirector = this.difficulty - numMoviesFromDirector;
-
         List<Movie> moviesFromDirector = movieService.getMoviesFromDirector(director, numMoviesFromDirector);
+
+        // If director does not have numMoviesFromDirector movies, we use more random movies
+        Integer numMoviesNotFromDirector = this.difficulty - moviesFromDirector.size();
         List<Movie> moviesNotFromDirector = movieService.getMoviesNotFromDirector(director, numMoviesNotFromDirector);
 
         ArrayList<Movie> movies = new ArrayList<>(moviesFromDirector);
@@ -90,12 +107,16 @@ public class GameController {
         model.addAttribute("movies",movies);
     }
 
+    /* *
+    * Sets up the gameplay page.
+    * First checks if lives are <=0, if so then go to end game screen.
+    * Else, the game page is initialized according to the difficulty chosen
+    * */
     @RequestMapping("/game")
     public String gamePage(Model model) {
         if (lives <= 0) {
             return endGame(model);
         }
-
         setDifficulty(model);
 
         model.addAttribute("lives",lives);
@@ -104,6 +125,11 @@ public class GameController {
         return "game";
     }
 
+    /* *
+    * Function that is called when the player chooses a movie during gameplay
+    * If the answer is correct, then scores is increased by 1
+    * Else, the player looses 1 life
+    * */
     @RequestMapping(value = "/checkAnswer", method = RequestMethod.GET)
     public String checkAnswer(@RequestParam String action, Model model, RedirectAttributes redirAttrs) {
         if (director.contains(action)) {
@@ -117,11 +143,9 @@ public class GameController {
         return "redirect:/game";
     }
 
-    @RequestMapping(value = "/end", method = RequestMethod.GET)
+    @RequestMapping(value = "/end")
     private String endGame(Model model) {
-        model.addAttribute("score",score);
-        lives = 3;
-        score = 0;
+        model.addAttribute("score", score);
         return "end";
     }
 }

@@ -25,6 +25,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    /**
+     * Function that handles the signup form, saves the new user if valid
+     * @param user The user that is signing up
+     * @param result The result of the signup form
+     * @param model The model that is used to display the signup form
+     * @return The signup page if the form is invalid, otherwise the main page
+     */
     public String signupPOST(User user, BindingResult result, Model model){
         if(result.hasErrors()){
             return "redirect:/signup";
@@ -42,6 +49,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    /**
+     * Function that handles the login form, logs in the user if valid
+     * @param user The user that is logging in
+     * @param result The result of the login form
+     * @param model The model that is used to display the login form
+     * @param session The session that is used to store the user
+     * @return The login page if the form is invalid, otherwise the main page
+     */
     public String loginPOST(User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
             return "login";

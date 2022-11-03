@@ -9,8 +9,8 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    private  String title;
-    private  Integer year;
+    private String title;
+    private Integer year;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Director director;
