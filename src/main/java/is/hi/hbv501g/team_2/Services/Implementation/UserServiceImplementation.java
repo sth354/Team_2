@@ -29,8 +29,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public User findByUserName(String userName) {
-        return userRepository.findByUsername(userName);
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -40,12 +40,21 @@ public class UserServiceImplementation implements UserService {
      * @return user if username and password match, otherwise null
      */
     public User login(User user) {
-        User doesExist = findByUserName(user.getUsername());
+        User doesExist = findByUsername(user.getUsername());
         if(doesExist != null){
             if(doesExist.getPassword().equals(user.getPassword())){
                 return doesExist;
             }
         }
         return null;
+    }
+
+    /**
+     * Deletes a user
+     * @param user The user to be deleted
+     */
+    @Override
+    public void delete(User user) {
+        userRepository.delete(user);
     }
 }

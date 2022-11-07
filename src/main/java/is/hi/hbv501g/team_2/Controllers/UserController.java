@@ -36,7 +36,7 @@ public class UserController {
         if(result.hasErrors()){
             return "redirect:/signup";
         }
-        User exists = userService.findByUserName(user.getUsername());
+        User exists = userService.findByUsername(user.getUsername());
         if(exists == null){
             userService.save(user);
         }
@@ -66,6 +66,6 @@ public class UserController {
             session.setAttribute("LoggedInUser", exists);
             model.addAttribute("LoggedInUser", exists);
         }
-        return "redirect:/";
+        return "loggedIn";
     }
 }
