@@ -2,8 +2,12 @@ package is.hi.hbv501g.team_2.Controllers;
 
 import is.hi.hbv501g.team_2.Persistence.Entities.Director;
 import is.hi.hbv501g.team_2.Persistence.Entities.Movie;
+import is.hi.hbv501g.team_2.Persistence.Entities.Score;
+import is.hi.hbv501g.team_2.Persistence.Entities.User;
 import is.hi.hbv501g.team_2.Services.DirectorService;
 import is.hi.hbv501g.team_2.Services.MovieService;
+import is.hi.hbv501g.team_2.Services.ScoreboardService;
+import is.hi.hbv501g.team_2.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 @Controller
 public class GameController {
     private DirectorService directorService;
     private MovieService movieService;
+
+    private ScoreboardService scoreboardService;
 
     // lives are number of lives during gameplay
     private int lives;
@@ -31,9 +38,10 @@ public class GameController {
 
 
     @Autowired
-    public GameController(DirectorService directorService, MovieService movieService) {
+    public GameController(DirectorService directorService, MovieService movieService, ScoreboardService scoreboardService) {
         this.directorService = directorService;
         this.movieService = movieService;
+        this.scoreboardService = scoreboardService;
     }
 
     /**
@@ -113,9 +121,9 @@ public class GameController {
     * Else, the game page is initialized according to the difficulty chosen
     * */
     @RequestMapping("/game")
-    public String gamePage(Model model) {
+    public String gamePage(Model model, HttpSession session) {
         if (lives <= 0) {
-            return endGame(model);
+            return endGame(model, session);
         }
         setDifficulty(model);
 
@@ -143,9 +151,17 @@ public class GameController {
         return "redirect:/game";
     }
 
+    //TODO: ætti þetta að vera hérna?
+    private void saveScore(Model model, HttpSession session){
+        scoreboardService.save(new Score(this.difficulty, this.score, (User) session.getAttribute("LoggedInUser")));
+        // þetta er mad sus breyta þessu seinna í getScore()
+        // bara for testing purposes
+    }
+
     @RequestMapping(value = "/end")
-    private String endGame(Model model) {
+    private String endGame(Model model, HttpSession session) {
         model.addAttribute("score", score);
+        saveScore(model, session);
         return "end";
     }
 }

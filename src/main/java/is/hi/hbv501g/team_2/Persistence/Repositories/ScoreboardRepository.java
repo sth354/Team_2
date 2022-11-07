@@ -10,4 +10,5 @@ public interface ScoreboardRepository extends JpaRepository<Score, Long> {
     Score save(Score score);
     List<Score> findByDifficulty(int difficulty);
     List<Score> findByUser(User user);
+    List<Score> findAll();
 }

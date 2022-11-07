@@ -9,4 +9,6 @@ public interface ScoreboardService {
     Score save(Score score);
     List<Score> findByDifficulty(int difficulty);
     List<Score> findByUser(User user);
+
+    List<Score> findAll();
 }

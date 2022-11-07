@@ -4,8 +4,24 @@
         <meta charset="UTF-8">
         <title>View scoreboards</title>
     </head>
+    <h2>All scores</h2>
     <body>
-        <h2>Scoreboards</h2>
-        stuff
+        <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Points</th>
+                <th>Difficulty</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="score: ${scores}">
+                <td th:text="${score.getUser()}">
+                <td th:text="${score.getPoints()}">
+                <td th:text="${score.getDifficulty()}">
+            </tr>
+        </tbody>
+
+        </table>
     </body>
 </html>
