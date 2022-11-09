@@ -51,7 +51,7 @@ public class UserServiceImplementation implements UserService {
 
     /**
      * Deletes a user
-     * @param user The user to be deleted
+     * @param user the user to be deleted
      */
     @Override
     public void delete(User user) {

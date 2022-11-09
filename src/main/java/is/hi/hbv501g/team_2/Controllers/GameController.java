@@ -68,7 +68,7 @@ public class GameController {
         return "redirect:/game";
     }
 
-    /* *
+    /**
      * Called when easy difficulty is selected
      * Initializes game with easy difficulty
      * */
@@ -90,7 +90,12 @@ public class GameController {
         return "difficulty";
     }
 
-    //Adds random director
+    /**
+     * Adds a random director to the specified model.
+     *
+     * @param model
+     * @return the Director added to the model.
+     */
     private Director addRandomDirectorToModel(Model model) {
         director = directorService.getRandomDirector();
         model.addAttribute("director", director);
@@ -115,11 +120,14 @@ public class GameController {
         model.addAttribute("movies",movies);
     }
 
-    /* *
-    * Sets up the gameplay page.
-    * First checks if lives are <=0, if so then go to end game screen.
-    * Else, the game page is initialized according to the difficulty chosen
-    * */
+    /**
+     * Sets up the gameplay page.
+     * First checks if lives are <=0, if so then go to end game screen.
+     * Else, the game page is initialized according to the difficulty chosen
+     *
+     * @param model the model
+     * @param session the Http session
+     */
     @RequestMapping("/game")
     public String gamePage(Model model, HttpSession session) {
         if (lives <= 0) {
@@ -133,7 +141,7 @@ public class GameController {
         return "game";
     }
 
-    /* *
+    /**
     * Function that is called when the player chooses a movie during gameplay
     * If the answer is correct, then scores is increased by 1
     * Else, the player looses 1 life
