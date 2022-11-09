@@ -17,8 +17,8 @@ public class User {
 
     protected User() {
     }
-    public User(String userName, String password) {
-        this.username = userName;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -34,8 +34,8 @@ public class User {
         return username;
     }
 
-    public void setUserName(String userName) {
-        this.username = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
