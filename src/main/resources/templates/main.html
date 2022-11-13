@@ -19,7 +19,7 @@
                     <div class="login-leaderboard">
                         <!-- User is Logged in -->
                         <div th:if="${session.LoggedInUser != null}">
-                            <div class="button"><a href="/login">Logout</a></div>
+                            <div class="button"><a th:attr="${session.LoggedInUser == null}"> href="/main">Logout</a></div>
                         </div>
                         <!-- Not logged in - Guest user -->
                         <div th:unless="${session.LoggedInUser != null}"

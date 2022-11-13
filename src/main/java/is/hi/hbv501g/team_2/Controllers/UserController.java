@@ -50,6 +50,12 @@ public class UserController {
         return "login";
     }
 
+    //WIP to CHANGE!!!
+    @RequestMapping(value ="/logout", method = RequestMethod.GET)
+    public void logOut(User user, HttpSession session)   {
+        session.addAttribute.loggedInUser == null;
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     /**
      * Function that handles the login form, logs in the user if valid
