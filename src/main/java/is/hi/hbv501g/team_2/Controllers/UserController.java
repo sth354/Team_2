@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
     UserService userService;
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -38,6 +39,7 @@ public class UserController {
         }
         User exists = userService.findByUsername(user.getUsername());
         if(exists == null){
+
             userService.save(user);
         }
         return "redirect:/";
