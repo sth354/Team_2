@@ -39,6 +39,7 @@ a {
 .menu {
     display: grid;
     background-color: #06168f;
+    height: 70vh;
     color: white;
     width: 90%;
     justify-content: center;
