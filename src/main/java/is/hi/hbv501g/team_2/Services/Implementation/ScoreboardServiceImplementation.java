@@ -32,4 +32,9 @@ public class ScoreboardServiceImplementation implements ScoreboardService {
     public List<Score> findByUser(User user) {
         return scoreboardRepository.findByUser(user);
     }
+
+    @Override
+    public List<Score> findAll(){
+        return scoreboardRepository.findAll();
+    }
 }
