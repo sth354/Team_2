@@ -11,7 +11,7 @@
         <h2 class = "nav"> <a th:href="@{/}"> Main menu</a>  </h2>
         <div class="main-container">
             <div class="menu">
-                <div class = "alert " role="alert" th:text="${success}" th:if="${success}"></div>
+                <div class = "alert" role="alert" th:text="${success}" th:if="${success}"></div>
                 <div class = "alert" role="alert" th:text="${fail}" th:if="${fail}"></div>
                 <div class="menu-item">
                     <p>
@@ -22,9 +22,11 @@
                 </div>
                 <div class="menu-item">
                     <form action="#" th:action="@{/checkAnswer}" method="GET">
-                        <tr th:each="movie: ${movies}">
-                            <input type="submit" name="action" th:value="${movie}"/>
-                        </tr>
+                        <div class="director-options">
+                            <div th:each="movie: ${movies}" class="button">
+                                <input type="submit" name="action" th:value="${movie}"/>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
