@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -50,30 +51,37 @@ public class UserController {
         return "login";
     }
 
-    //WIP to CHANGE!!!
-    @RequestMapping(value ="/logout", method = RequestMethod.GET)
-    public void logOut(User user, HttpSession session)   {
-        session.addAttribute.loggedInUser == null;
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     /**
      * Function that handles the login form, logs in the user if valid
      * @param user The user that is logging in
      * @param result The result of the login form
-     * @param model The model that is used to display the login form
      * @param session The session that is used to store the user
+     * @param redirAttrs The redirect attributes that are used to display error messages
      * @return The login page if the form is invalid, otherwise the main page
      */
-    public String loginPOST(User user, BindingResult result, Model model, HttpSession session){
-        if(result.hasErrors()){
-            return "login";
+    public String loginPOST(User user, BindingResult result, HttpSession session, RedirectAttributes redirAttrs) {
+        if (result.hasErrors()) {
+            redirAttrs.addFlashAttribute("error", "Unexpected error");
+            return "redirect:/login";
         }
         User exists = userService.login(user);
-        if(exists != null){
+        if (exists != null) {
             session.setAttribute("LoggedInUser", exists);
-            model.addAttribute("LoggedInUser", exists);
+            return "redirect:/";
         }
-        return "loggedIn";
+        redirAttrs.addFlashAttribute("error", "Invalid username or password");
+        return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/logout")
+    /**
+     * Function that logs out the user
+     * @param session The session that is used to store the user
+     * @return The main page
+     */
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 }

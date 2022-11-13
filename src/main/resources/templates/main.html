@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../static/css/styles.css" type="text/css" th:href="@{/css/styles.css}" />
@@ -19,13 +19,12 @@
                     <div class="login-leaderboard">
                         <!-- User is Logged in -->
                         <div th:if="${session.LoggedInUser != null}">
-                            <div class="button"><a th:attr="${session.LoggedInUser == null}"> href="/main">Logout</a></div>
+                            <div class="button"><a href="/logout">Logout</a></div>
                         </div>
                         <!-- Not logged in - Guest user -->
-                        <div th:unless="${session.LoggedInUser != null}"
+                        <div th:unless="${session.LoggedInUser != null}">
                             <div class="button"><a href="/login">Login</a></div>
                         </div>
-
 
                         <div class="button"><a href="/viewScoreboards">Leaderboards</a></div>
                     </div>
