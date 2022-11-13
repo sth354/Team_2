@@ -8,6 +8,8 @@
     <body>
         <div class="menu">
             <h2>Login to your account</h2>
+            <h2 class = "nav"> <a th:href="@{/}"> Main menu</a>  </h2>
+
             <form action="#" th:action="@{/login}" th:object="${user}" method="post">
                 <div class = "alert" role="alert" th:text="${error}" th:if="${error}"></div>
                 <input type="text" name="username" id="username" th:field="*{username}"/>

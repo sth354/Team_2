@@ -8,6 +8,7 @@
   <body>
     <div class="menu">
       <h2>Signup for an account</h2>
+      <h2 class = "nav"> <a th:href="@{/}"> Main menu</a>  </h2>
       <form action="#" th:action="@{/signup}" th:object="${user}"  method="post">
         <input type="text" name="username" id="username" th:field="*{username}"/>
         <input type="text" name="password" id="password" th:value="*{password}"/>
