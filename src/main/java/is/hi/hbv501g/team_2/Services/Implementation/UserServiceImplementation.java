@@ -6,6 +6,9 @@ import is.hi.hbv501g.team_2.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Service
@@ -20,6 +23,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User save(User user) {
+        user.setPassword(get_SHA_512_SecurePassword(user.getPassword(),"salt"));
         return userRepository.save(user);
     }
 
@@ -29,8 +33,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public User findByUserName(String userName) {
-        return userRepository.findByUsername(userName);
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -40,12 +44,38 @@ public class UserServiceImplementation implements UserService {
      * @return user if username and password match, otherwise null
      */
     public User login(User user) {
-        User doesExist = findByUserName(user.getUsername());
+        User doesExist = findByUsername(user.getUsername());
         if(doesExist != null){
-            if(doesExist.getPassword().equals(user.getPassword())){
+            if(doesExist.getPassword().equals(get_SHA_512_SecurePassword(user.getPassword(),"salt"))){
                 return doesExist;
             }
         }
         return null;
+    }
+
+    public String get_SHA_512_SecurePassword(String passwordToHash, String salt){
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt.getBytes(StandardCharsets.UTF_8));
+            byte[] bytes = md.digest(passwordToHash.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
+    }
+
+    /**
+     * Deletes a user
+     * @param user the user to be deleted
+     */
+    @Override
+    public void delete(User user) {
+        userRepository.delete(user);
     }
 }

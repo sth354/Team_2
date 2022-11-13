@@ -2,10 +2,29 @@
 <html xmlns:th="https://thymeleaf.org">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="../static/css/styles.css" type="text/css" th:href="@{/css/styles.css}" />
         <title>View scoreboards</title>
     </head>
+    <h2>All scores</h2>
     <body>
-        <h2>Scoreboards</h2>
-        stuff
+    <div class="menu">
+        <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Points</th>
+                <th>Difficulty</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="score: ${scores}">
+                <td th:text="${score.getUser()}">
+                <td th:text="${score.getPoints()}">
+                <td th:text="${score.getDifficulty()}">
+            </tr>
+        </tbody>
+
+        </table>
+    </div>
     </body>
 </html>
