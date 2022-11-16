@@ -52,8 +52,9 @@ public class UserServiceImplementation implements UserService {
         List<User> doesExistList = findAllByUsername(user.getUsername());
         for (User u: doesExistList) {
             if (u != null) {
-                if (u.getPassword().equals(get_SHA_512_SecurePassword(user.getPassword(),"salt")));
-                return u;
+                if (u.getPassword().equals(get_SHA_512_SecurePassword(user.getPassword(),"salt"))) {;
+                    return u;
+                };
             }
         }
         return null;
