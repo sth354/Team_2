@@ -28,6 +28,11 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    public List<User> findAllByUsername(String username) {
+        return userRepository.findAllByUsername(username);
+    }
+
+    @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -44,10 +49,11 @@ public class UserServiceImplementation implements UserService {
      * @return user if username and password match, otherwise null
      */
     public User login(User user) {
-        User doesExist = findByUsername(user.getUsername());
-        if(doesExist != null){
-            if(doesExist.getPassword().equals(get_SHA_512_SecurePassword(user.getPassword(),"salt"))){
-                return doesExist;
+        List<User> doesExistList = findAllByUsername(user.getUsername());
+        for (User u: doesExistList) {
+            if (u != null) {
+                if (u.getPassword().equals(get_SHA_512_SecurePassword(user.getPassword(),"salt")));
+                return u;
             }
         }
         return null;

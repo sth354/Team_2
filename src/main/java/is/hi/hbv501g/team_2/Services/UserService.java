@@ -10,6 +10,7 @@ public interface UserService {
     User findByUsername(String username);
     User login(User user);
 
+    List<User> findAllByUsername(String username);
     void delete(User user);
 
 }
