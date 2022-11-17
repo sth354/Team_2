@@ -34,7 +34,7 @@ public class UserController {
      * @param model The model that is used to display the signup form
      * @return The signup page if the form is invalid, otherwise the main page
      */
-    public String signupPOST(User user, BindingResult result, Model model){
+    public String signupPOST(User user, BindingResult result, RedirectAttributes redirAttrs, Model model){
         if(result.hasErrors()){
             return "redirect:/signup";
         }
@@ -42,6 +42,10 @@ public class UserController {
         if(exists == null){
 
             userService.save(user);
+        }
+        else {
+            redirAttrs.addFlashAttribute("error_", "This username is already taken");
+            return "redirect:/signup";
         }
         return "redirect:/";
     }
