@@ -49,14 +49,12 @@ public class UserServiceImplementation implements UserService {
      * @return user if username and password match, otherwise null
      */
     public User login(User user) {
-        List<User> doesExistList = findAllByUsername(user.getUsername());
-        for (User u: doesExistList) {
-            if (u != null) {
-                if (u.getPassword().equals(get_SHA_512_SecurePassword(user.getPassword(),"salt"))) {
-                    return u;
+        User doesExist = findByUsername(user.getUsername());
+            if (doesExist != null) {
+                if (doesExist.getPassword().equals(get_SHA_512_SecurePassword(user.getPassword(),"salt"))) {
+                    return doesExist;
                 }
             }
-        }
         return null;
     }
 
