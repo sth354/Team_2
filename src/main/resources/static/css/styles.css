@@ -1,5 +1,5 @@
 html {
-    background-color: #06168f;
+    background-image: linear-gradient(#06168f,#409be3);
 }
 
 body {
@@ -90,4 +90,8 @@ a {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.nav {
+    color: darkorange;
 }

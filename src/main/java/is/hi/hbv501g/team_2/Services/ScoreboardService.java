@@ -10,5 +10,6 @@ public interface ScoreboardService {
     List<Score> findByDifficulty(int difficulty);
     List<Score> findByUser(User user);
 
+    List<Score> topTenScoresAll();
     List<Score> findAll();
 }

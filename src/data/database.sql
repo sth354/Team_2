@@ -13,7 +13,6 @@ BEGIN;
 
     INSERT INTO facts(id, fact) VALUES (1, 'It is physically impossible for pigs to look up into the sky.');
     INSERT INTO facts(id, fact) VALUES (2, 'In Joker, Joaquin Phoenix lost 52 pounds to play the role of Arthur Fleck.');
-
     INSERT INTO facts(id, fact) VALUES (3, 'One famous "Pulp Fiction" scene was filmed backward');
 
 

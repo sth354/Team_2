@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="../static/css/styles.css" type="text/css" th:href="@{/css/styles.css}" />
         <title>View scoreboards</title>
     </head>
+    <h2 class = "nav"> <a th:href="@{/}"> Main menu</a>  </h2>
     <h2>All scores</h2>
     <body>
     <div class="menu">
@@ -15,9 +16,10 @@
                 <th>Points</th>
                 <th>Difficulty</th>
             </tr>
+        <span>Top ten all time</span>
         </thead>
         <tbody>
-            <tr th:each="score: ${scores}">
+            <tr th:each="score: ${scoresTopTenAll}">
                 <td th:text="${score.getUser()}">
                 <td th:text="${score.getPoints()}">
                 <td th:text="${score.getDifficulty()}">

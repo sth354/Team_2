@@ -34,6 +34,11 @@ public class ScoreboardServiceImplementation implements ScoreboardService {
     }
 
     @Override
+    public List<Score> topTenScoresAll() {
+        return scoreboardRepository.findTop10ByOrderByPointsDesc();
+    }
+
+    @Override
     public List<Score> findAll(){
         return scoreboardRepository.findAll();
     }
