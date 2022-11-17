@@ -3,10 +3,19 @@
 -- navigate to Team_2 using \cd, (\! dir to see current directory or \! ls for linux)
 -- \i src/data/database.sql
 -- á windows : \i src//data//database.sql
+-- CREATE TABLE facts (id bigint, fact varchar(255));
 BEGIN;
 
     TRUNCATE TABLE directors CASCADE;
     TRUNCATE TABLE movies CASCADE;
+    TRUNCATE TABLE facts CASCADE;
+
+
+    INSERT INTO facts(id, fact) VALUES (1, 'It is physically impossible for pigs to look up into the sky.');
+    INSERT INTO facts(id, fact) VALUES (2, 'In Joker, Joaquin Phoenix lost 52 pounds to play the role of Arthur Fleck.');
+
+    INSERT INTO facts(id, fact) VALUES (3, 'One famous "Pulp Fiction" scene was filmed backward');
+
 
     INSERT INTO directors(id,name) VALUES(1,'Steven Spielberg');
     INSERT INTO directors(id,name) VALUES(2,'Christopher Nolan');

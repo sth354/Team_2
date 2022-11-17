@@ -4,10 +4,7 @@ import is.hi.hbv501g.team_2.Persistence.Entities.Director;
 import is.hi.hbv501g.team_2.Persistence.Entities.Movie;
 import is.hi.hbv501g.team_2.Persistence.Entities.Score;
 import is.hi.hbv501g.team_2.Persistence.Entities.User;
-import is.hi.hbv501g.team_2.Services.DirectorService;
-import is.hi.hbv501g.team_2.Services.MovieService;
-import is.hi.hbv501g.team_2.Services.ScoreboardService;
-import is.hi.hbv501g.team_2.Services.UserService;
+import is.hi.hbv501g.team_2.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +20,7 @@ public class GameController {
     private DirectorService directorService;
     private MovieService movieService;
 
+    private FactService factService;
     private ScoreboardService scoreboardService;
 
     // lives are number of lives during gameplay
@@ -38,10 +36,11 @@ public class GameController {
 
 
     @Autowired
-    public GameController(DirectorService directorService, MovieService movieService, ScoreboardService scoreboardService) {
+    public GameController(DirectorService directorService, MovieService movieService, ScoreboardService scoreboardService, FactService factService) {
         this.directorService = directorService;
         this.movieService = movieService;
         this.scoreboardService = scoreboardService;
+        this.factService = factService;
     }
 
     /**
@@ -81,7 +80,8 @@ public class GameController {
     }
 
     @RequestMapping("/")
-    public String mainMenu() {
+    public String mainMenu(Model model) {
+        model.addAttribute("fact",factService.getRandomFact());
         return "main";
     }
 
