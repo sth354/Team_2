@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+//@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,8 +12,8 @@ public class User {
     private String username;
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
-    private List<Score> scores;
+    //@OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
+    //private List<Score> scores;
 
     protected User() {
     }
