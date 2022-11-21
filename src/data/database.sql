@@ -6,10 +6,19 @@
 -- CREATE TABLE facts (id bigint, fact varchar(255));
 BEGIN;
 
-    TRUNCATE TABLE directors CASCADE;
-    TRUNCATE TABLE movies CASCADE;
-    TRUNCATE TABLE facts CASCADE;
+    DROP TABLE IF EXISTS facts CASCADE;
+    DROP TABLE IF EXISTS directors CASCADE;
+    DROP TABLE IF EXISTS movies CASCADE;
+    DROP TABLE IF EXISTS scores CASCADE;
+    DROP TABLE IF EXISTS users CASCADE;
 
+
+
+    CREATE TABLE movies(id bigint, title varchar(255), year integer, director_id bigint);
+    CREATE TABLE directors(id bigint, name varchar(255));
+    CREATE TABLE facts(id bigint, fact varchar(255));
+    CREATE TABLE users(id bigint, username varchar(255), password varchar(255));
+    CREATE TABLE scores(id bigint, difficulty integer, points integer, username varchar(255));
 
     INSERT INTO facts(id, fact) VALUES (1, 'It is physically impossible for pigs to look up into the sky.');
     INSERT INTO facts(id, fact) VALUES (2, 'In Joker, Joaquin Phoenix lost 52 pounds to play the role of Arthur Fleck.');

@@ -170,8 +170,10 @@ public class GameController {
 
     @RequestMapping(value = "/end")
     private String endGame(Model model, HttpSession session) {
-        model.addAttribute("score", score);
-        saveScore(model, session);
+        if (session.getAttribute("LoggedInUser") != null){
+            model.addAttribute("score", score);
+            saveScore(model, session);
+        }
         return "end";
     }
 }
