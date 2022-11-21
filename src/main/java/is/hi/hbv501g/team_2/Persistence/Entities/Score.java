@@ -10,9 +10,9 @@ public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
-    private  int difficulty;
-    private  int points;
-    private  String username;
+    private int difficulty;
+    private int points;
+    private String username;
 
     public Score(int difficulty, int points, String username) {
         this.difficulty = difficulty;

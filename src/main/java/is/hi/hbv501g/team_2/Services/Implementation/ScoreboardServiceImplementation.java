@@ -36,7 +36,7 @@ public class ScoreboardServiceImplementation implements ScoreboardService {
     @Override
     public List<Score> topTenScoresHard(int difficulty) {
         //lmao
-        return scoreboardRepository.findTop10ByDifficultyOrderByPointsDesc(difficulty);
+        return scoreboardRepository.findTop10ByDifficultyOrderByPointsAsc(difficulty);
     }
 
     @Override
