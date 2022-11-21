@@ -19,7 +19,7 @@ public class ScoreController {
     @GetMapping("/viewScoreboards")
     public ModelAndView viewScoreboards() {
         ModelAndView mav = new ModelAndView("viewScores");
-        mav.addObject("scoresTopTenAll",scoreboardService.topTenScoresAll());
+        mav.addObject("topTenHard",scoreboardService.topTenScoresHard( 7));
         return mav;
     }
 

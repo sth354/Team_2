@@ -29,14 +29,21 @@ public class ScoreboardServiceImplementation implements ScoreboardService {
     }
 
     @Override
-    public List<Score> findByUser(User user) {
-        return scoreboardRepository.findByUser(user);
+    public List<Score> findByUsername(String username) {
+        return scoreboardRepository.findByUsername(username);
+    }
+
+    @Override
+    public List<Score> topTenScoresHard(int difficulty) {
+        //lmao
+        return scoreboardRepository.findTop10ByDifficultyOrderByPointsDesc(difficulty);
     }
 
     @Override
     public List<Score> topTenScoresAll() {
         return scoreboardRepository.findTop10ByOrderByPointsDesc();
     }
+
 
     @Override
     public List<Score> findAll(){

@@ -16,11 +16,11 @@
                 <th>Points</th>
                 <th>Difficulty</th>
             </tr>
-        <span>Top ten all time</span>
+        <span>Top ten hard mode scores</span>
         </thead>
         <tbody>
-            <tr th:each="score: ${scoresTopTenAll}">
-                <td th:text="${score.getUser()}">
+            <tr th:each="score: ${topTenHard}">
+                <td th:text="${score.getUsername()}">
                 <td th:text="${score.getPoints()}">
                 <td th:text="${score.getDifficulty()}">
             </tr>

@@ -161,7 +161,9 @@ public class GameController {
 
     //TODO: ætti þetta að vera hérna?
     private void saveScore(Model model, HttpSession session){
-        scoreboardService.save(new Score(this.difficulty, this.score, (User) session.getAttribute("LoggedInUser")));
+        User user = (User) session.getAttribute("LoggedInUser");
+
+        scoreboardService.save(new Score(this.difficulty, this.score, user.getUsername()));
         // þetta er mad sus breyta þessu seinna í getScore()
         // bara for testing purposes
     }
