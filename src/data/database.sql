@@ -17,8 +17,6 @@ BEGIN;
     CREATE TABLE movies(id bigint, title varchar(255), year integer, director_id bigint);
     CREATE TABLE directors(id bigint, name varchar(255));
     CREATE TABLE facts(id bigint, fact varchar(255));
-    CREATE TABLE users(id bigint, username varchar(255), password varchar(255));
-    CREATE TABLE scores(id bigint, difficulty integer, points integer, user_id bigint);
 
     INSERT INTO facts(id, fact) VALUES (1, 'It is physically impossible for pigs to look up into the sky.');
     INSERT INTO facts(id, fact) VALUES (2, 'In Joker, Joaquin Phoenix lost 52 pounds to play the role of Arthur Fleck.');

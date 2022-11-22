@@ -12,6 +12,6 @@ public interface ScoreboardRepository extends JpaRepository<Score, Long> {
     List<Score> findByUser(User user);
 
     List<Score> findTop10ByOrderByPointsDesc();
-    List<Score> findTop10ByDifficultyOrderByPointsAsc(int difficulty);
+    List<Score> findTop10ByDifficultyOrderByPointsDesc(int difficulty);
     List<Score> findAll();
 }
