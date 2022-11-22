@@ -12,8 +12,6 @@ public class User {
     private String username;
     private String password;
 
-    //@OneToMany(mappedBy = "user", cascade =  CascadeType.ALL, orphanRemoval = true)
-    //private List<Score> scores;
 
     protected User() {
     }
@@ -26,9 +24,6 @@ public class User {
         return ID;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
-    }
 
     public String getUsername() {
         return username;
@@ -47,6 +42,6 @@ public class User {
     }
 
     @Override
-    public String toString() { return username; }
+    public String toString() { return this.username; }
 
 }

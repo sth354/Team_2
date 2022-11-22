@@ -12,12 +12,13 @@ public class Score {
     private long ID;
     private int difficulty;
     private int points;
-    private String username;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
-    public Score(int difficulty, int points, String username) {
+    public Score(int difficulty, int points, User user) {
         this.difficulty = difficulty;
         this.points = points;
-        this.username = username;
+        this.user = user;
     }
 
     public Score() {
@@ -36,7 +37,7 @@ public class Score {
         return points;
     }
 
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return this.user;
     }
 }

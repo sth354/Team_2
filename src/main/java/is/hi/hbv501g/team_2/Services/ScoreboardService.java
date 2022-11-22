@@ -8,9 +8,9 @@ import java.util.List;
 public interface ScoreboardService {
     Score save(Score score);
     List<Score> findByDifficulty(int difficulty);
-    List<Score> findByUsername(String username);
+    List<Score> findByUser(User user);
 
-    List<Score> topTenScoresHard(int difficulty);
+    List<Score> topTenScoresByDiff(int difficulty);
     List<Score> topTenScoresAll();
     List<Score> findAll();
 }

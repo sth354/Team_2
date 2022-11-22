@@ -22,11 +22,14 @@ public class ScoreController {
     @GetMapping("/viewScoreboards")
     public ModelAndView viewScoreboards() {
         ModelAndView mav = new ModelAndView("viewScores");
-        List<Score> top10 = scoreboardService.topTenScoresHard( 7);
-        //for (Score score : top10) {
-        //    System.out.println(score.getUsername());
-        //}
-        mav.addObject("topTenHard", top10);
+        List<Score> top10Hard = scoreboardService.topTenScoresByDiff( 7);
+        mav.addObject("topTenHard", top10Hard);
+        List<Score> top10Medium = scoreboardService.topTenScoresByDiff(4);
+        mav.addObject("topTenMedium", top10Medium);
+        List<Score> topTenEasy =scoreboardService.topTenScoresByDiff(3);
+        mav.addObject("topTenEasy",topTenEasy);
+
+
         return mav;
     }
 

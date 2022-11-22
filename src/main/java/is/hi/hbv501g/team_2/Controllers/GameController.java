@@ -163,7 +163,7 @@ public class GameController {
     private void saveScore(Model model, HttpSession session){
         User user = (User) session.getAttribute("LoggedInUser");
 
-        scoreboardService.save(new Score(this.difficulty, this.score, user.getUsername()));
+        scoreboardService.save(new Score(this.difficulty, this.score, user));
         // þetta er mad sus breyta þessu seinna í getScore()
         // bara for testing purposes
     }
@@ -171,9 +171,9 @@ public class GameController {
     @RequestMapping(value = "/end")
     private String endGame(Model model, HttpSession session) {
         if (session.getAttribute("LoggedInUser") != null){
-            model.addAttribute("score", score);
             saveScore(model, session);
         }
+        model.addAttribute("score", score);
         return "end";
     }
 }

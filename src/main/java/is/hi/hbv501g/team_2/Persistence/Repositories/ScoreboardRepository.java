@@ -9,7 +9,7 @@ import java.util.List;
 public interface ScoreboardRepository extends JpaRepository<Score, Long> {
     Score save(Score score);
     List<Score> findByDifficulty(int difficulty);
-    List<Score> findByUsername(String username);
+    List<Score> findByUser(User user);
 
     List<Score> findTop10ByOrderByPointsDesc();
     List<Score> findTop10ByDifficultyOrderByPointsAsc(int difficulty);
