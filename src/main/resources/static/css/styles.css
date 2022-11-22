@@ -1,5 +1,6 @@
 html {
     background-image: linear-gradient(#06168f,#409be3);
+    height: 100vh;
 }
 
 body {
@@ -38,7 +39,6 @@ a {
 
 .menu {
     display: grid;
-    background-color: #06168f;
     height: 70vh;
     color: white;
     width: 90%;
