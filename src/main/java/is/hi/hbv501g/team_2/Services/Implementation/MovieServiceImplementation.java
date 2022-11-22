@@ -13,12 +13,12 @@ import java.util.*;
 public class MovieServiceImplementation implements MovieService {
     private MovieRepository movieRepository;
 
-    private List<Movie> allMovies;
+    private List<Movie> moviesFromCurrentDirector;
+    private List<Movie> moviesNotFromCurrentDirector;
 
     @Autowired
     public MovieServiceImplementation(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
-        this.allMovies = movieRepository.findAll();
     }
 
     @Override
@@ -46,23 +46,45 @@ public class MovieServiceImplementation implements MovieService {
     }
 
     /**
+     * @param movies The list of movies to select from
+     * @param numberOfMovies The number random movies to select
+     * @return A list of random movies from the given list
+     */
+    private List<Movie> getRandomWithoutReplacement(List<Movie> movies, Integer numberOfMovies) {
+        if (numberOfMovies > movies.size()) {
+            throw new IllegalArgumentException("Number of movies to select is larger than the list of movies");
+        }
+
+        List<Integer> permutation = getRandomPermutationRange(movies.size());
+        List<Movie> randomMovies = new ArrayList<>();
+        for (int i = 0; i < numberOfMovies; i++) {
+            randomMovies.add(movies.get(permutation.get(i)));
+        }
+        return randomMovies;
+    }
+
+    /**
      * Returns a list of size numberOfMovies containing movies that are not from the given director
      * @param director The director to exclude
-     * @param numberOfMovies The number of movies to return
+     * @param difficulty The difficulty of the game, i.e. the number of movies
+     * @param numberOfActualMovies The number of movies which are from the prompted director
      * @return List<Movie>
      */
     @Override
-    public List<Movie> getMoviesNotFromDirector(Director director, Integer numberOfMovies) {
-        List<Integer> indices = getRandomPermutationRange(numberOfMovies);
+    public List<Movie> getMoviesNotFromDirector(Director director, Integer difficulty, Integer numberOfActualMovies) {
+        Integer numberOfMovies = difficulty - numberOfActualMovies;
 
-        List<Movie> randomMovies = new ArrayList<>();
-        List<Movie> allMovies = movieRepository.findMoviesByDirectorIsNot(director);
-
-        for (int i = 0; i < numberOfMovies && i < allMovies.size(); i++) {
-            randomMovies.add(allMovies.get(indices.get(i)));
+        // TODO: This is not optimal since if numberOfActualMovies is random then a user could reset the game repeatedly
+        if (moviesNotFromCurrentDirector != null && numberOfMovies != moviesNotFromCurrentDirector.size()) {
+            moviesNotFromCurrentDirector = null;
         }
 
-        return randomMovies;
+        if (moviesNotFromCurrentDirector == null) {
+            List<Movie> allMovies = movieRepository.findMoviesByDirectorIsNot(director);
+            moviesNotFromCurrentDirector = getRandomWithoutReplacement(allMovies, numberOfMovies);
+        }
+
+        return moviesNotFromCurrentDirector;
     }
 
     /**
@@ -73,18 +95,21 @@ public class MovieServiceImplementation implements MovieService {
      */
     @Override
     public List<Movie> getMoviesFromDirector(Director director, Integer numberOfMovies) {
-        List<Movie> allMovies = director.getMovies();
-
-        Integer numMovies = Math.min(numberOfMovies, allMovies.size());
-
-        List<Integer> indices = getRandomPermutationRange(numMovies);
-
-        List<Movie> randomMovies = new ArrayList<>();
-        for (int i = 0; i < numMovies; i++) {
-            randomMovies.add(allMovies.get(indices.get(i)));
+        if (moviesFromCurrentDirector == null) {
+            List<Movie> allMovies = director.getMovies();
+            Integer numberOfMoviesToSelect = Math.min(numberOfMovies, allMovies.size());
+            moviesFromCurrentDirector = getRandomWithoutReplacement(allMovies, numberOfMoviesToSelect);
         }
+        return moviesFromCurrentDirector;
+    }
 
-        return randomMovies;
+    /**
+     * Resets the cached movies
+     */
+    @Override
+    public void resetCachedMovies() {
+        moviesFromCurrentDirector = null;
+        moviesNotFromCurrentDirector = null;
     }
 
 }
