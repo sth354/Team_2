@@ -103,6 +103,9 @@ public class MovieServiceImplementation implements MovieService {
         return moviesFromCurrentDirector;
     }
 
+    /**
+     * Resets the cached movies
+     */
     @Override
     public void resetCachedMovies() {
         moviesFromCurrentDirector = null;
