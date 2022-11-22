@@ -7,6 +7,7 @@ import is.hi.hbv501g.team_2.Services.ScoreboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,6 +33,25 @@ public class ScoreboardServiceImplementation implements ScoreboardService {
     public List<Score> findByUser(User user) {
         return scoreboardRepository.findByUser(user);
     }
+
+    @Override
+    public List<Score> topTenScoresByDiff(int difficulty) {
+        List<Score> a = new ArrayList<>();
+        List<Score> all = scoreboardRepository.findTop10ByDifficultyOrderByPointsDesc(difficulty);
+        for (Score s: all) {
+            if (s != null) {
+                a.add(s);
+            }
+        }
+        System.out.println(a.size());
+        return a;
+    }
+
+    @Override
+    public List<Score> topTenScoresAll() {
+        return scoreboardRepository.findTop10ByOrderByPointsDesc();
+    }
+
 
     @Override
     public List<Score> findAll(){
