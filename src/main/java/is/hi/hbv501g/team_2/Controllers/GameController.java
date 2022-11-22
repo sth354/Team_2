@@ -97,7 +97,7 @@ public class GameController {
      * @return the Director added to the model.
      */
     private Director addRandomDirectorToModel(Model model) {
-        director = directorService.getRandomDirector();
+        director = directorService.getDirectorFromQueue();
         model.addAttribute("director", director);
         return director;
     }
@@ -105,13 +105,8 @@ public class GameController {
     private void setDifficulty(Model model){
         Director director = addRandomDirectorToModel(model);
 
-        // Todo: Temporary extra difficulty, refactor later
-        Integer numMoviesFromDirector = (int)(Math.random() * 2 + 1);
-        List<Movie> moviesFromDirector = movieService.getMoviesFromDirector(director, numMoviesFromDirector);
-
-        // If director does not have numMoviesFromDirector movies, we use more random movies
-        Integer numMoviesNotFromDirector = this.difficulty - moviesFromDirector.size();
-        List<Movie> moviesNotFromDirector = movieService.getMoviesNotFromDirector(director, numMoviesNotFromDirector);
+        List<Movie> moviesFromDirector = movieService.getMoviesFromDirector(director, 1);
+        List<Movie> moviesNotFromDirector = movieService.getMoviesNotFromDirector(director, this.difficulty, moviesFromDirector.size());
 
         ArrayList<Movie> movies = new ArrayList<>(moviesFromDirector);
         movies.addAll(moviesNotFromDirector);
@@ -156,6 +151,8 @@ public class GameController {
             redirAttrs.addFlashAttribute("fail", "that was incorrect :(");
             lives--;
         }
+        movieService.resetCachedMovies();
+        directorService.removeDirectorFromQueue();
         return "redirect:/game";
     }
 
