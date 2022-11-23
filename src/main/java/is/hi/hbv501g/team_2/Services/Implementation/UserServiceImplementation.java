@@ -112,6 +112,6 @@ public class UserServiceImplementation implements UserService {
         ipAddress = InetAddress.getByName("46.182.187.211");
         response = reader.country(ipAddress);
         country = response.getCountry();
-        return country.getIsoCode();
+        return country.getIsoCode().toLowerCase();
     }
 }

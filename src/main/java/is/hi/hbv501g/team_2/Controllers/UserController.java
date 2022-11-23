@@ -18,6 +18,7 @@ import java.net.UnknownHostException;
 @Controller
 public class UserController {
     UserService userService;
+    private String userCountry;
 
     @Autowired
     public UserController(UserService userService) {
@@ -93,7 +94,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userCountry")
-    public String userCountry() throws IOException, GeoIp2Exception {
-        return userService.lookupCountry();
+    public String userCountry(Model model) throws IOException, GeoIp2Exception {
+        userCountry = (userService.lookupCountry()) + ".svg";
+        model.addAttribute("userCountry",userCountry);
+        return "userCountry";
     }
 }
