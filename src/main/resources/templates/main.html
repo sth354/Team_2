@@ -44,7 +44,7 @@
                 </section>
                 <!-- Fun facts -->
                 <section>
-                    <div>
+                    <div th:if = "${fact != null}">
                         <span th:text = "${fact.getFact()}"></span>
                     </div>
                 </section>
