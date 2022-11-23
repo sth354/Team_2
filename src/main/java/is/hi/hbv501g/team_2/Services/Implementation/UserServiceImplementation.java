@@ -107,12 +107,13 @@ public class UserServiceImplementation implements UserService {
     public String lookupCountry() throws IOException, GeoIp2Exception {
         try {
             reader = new DatabaseReader.Builder(countryDatabase).build();
-            ipString = request.getRemoteAddr();
+            //ipString = request.getRemoteAddr();
+            ipString = request.getHeader("X-FORWARDED-FOR");
             ipAddress = InetAddress.getByName(ipString);
             response = reader.country(ipAddress);
             country = response.getCountry();
-            return country.getIsoCode().toLowerCase();
-            //return ipString;
+            //return country.getIsoCode().toLowerCase();
+            return ipString;
         }
         catch (GeoIp2Exception e) {
             return ipString;
