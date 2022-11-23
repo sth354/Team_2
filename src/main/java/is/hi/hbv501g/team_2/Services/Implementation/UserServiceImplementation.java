@@ -1,11 +1,19 @@
 package is.hi.hbv501g.team_2.Services.Implementation;
 
+import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.exception.GeoIp2Exception;
+import com.maxmind.geoip2.model.CountryResponse;
+import com.maxmind.geoip2.record.Country;
 import is.hi.hbv501g.team_2.Persistence.Entities.User;
 import is.hi.hbv501g.team_2.Persistence.Repositories.UserRepository;
 import is.hi.hbv501g.team_2.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,6 +21,18 @@ import java.util.List;
 
 @Service
 public class UserServiceImplementation implements UserService {
+
+
+    @Autowired
+    private HttpServletRequest request;
+    private String ipString;
+    private InetAddress ipAddress;
+
+    private File countryDatabase = new File("src/data/GeoLite2-Country.mmdb");
+    private CountryResponse response;
+    private DatabaseReader reader;
+
+    private Country country;
 
     private UserRepository userRepository;
 
@@ -82,5 +102,19 @@ public class UserServiceImplementation implements UserService {
     @Override
     public void delete(User user) {
         userRepository.delete(user);
+    }
+
+    public String lookupCountry() throws IOException, GeoIp2Exception {
+        try {
+            reader = new DatabaseReader.Builder(countryDatabase).build();
+            ipString = request.getRemoteAddr();
+            ipAddress = InetAddress.getByName(ipString);
+            response = reader.country(ipAddress);
+            country = response.getCountry();
+            return country.getIsoCode().toLowerCase();
+        }
+        catch (GeoIp2Exception e) {
+            return "earth";
+        }
     }
 }

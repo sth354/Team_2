@@ -30,12 +30,11 @@
                         <div class="button"><a href="/movie-of-the-day"> Give me a random movie to watch </a></div>
                     </div>
                 </section>
-
                 <section class="menu-item">
                     <div class="signup">
                         <div th:if="${session.LoggedInUser != null}">
-
-                          <h3>Welcome <div th:text="${session.LoggedInUser}"></div></h3>
+                            <h3>Welcome <div th:text="${session.LoggedInUser}"></div></h3>
+                            <img th:src="${userCountry}"/>
                         </div>
                         <div th:unless="${session.LoggedInUser != null}">
                             <h3>Don't have an account?</h3>
