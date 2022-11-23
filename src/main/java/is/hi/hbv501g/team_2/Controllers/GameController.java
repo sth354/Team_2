@@ -1,9 +1,6 @@
 package is.hi.hbv501g.team_2.Controllers;
 
-import is.hi.hbv501g.team_2.Persistence.Entities.Director;
-import is.hi.hbv501g.team_2.Persistence.Entities.Movie;
-import is.hi.hbv501g.team_2.Persistence.Entities.Score;
-import is.hi.hbv501g.team_2.Persistence.Entities.User;
+import is.hi.hbv501g.team_2.Persistence.Entities.*;
 import is.hi.hbv501g.team_2.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,8 +78,10 @@ public class GameController {
 
     @RequestMapping("/")
     public String mainMenu(Model model) {
-        model.addAttribute("fact",factService.getRandomFact());
+        Fact fact = factService.getRandomFact();
+        model.addAttribute("fact",fact);
         return "main";
+
     }
 
     @RequestMapping("/difficulty")
