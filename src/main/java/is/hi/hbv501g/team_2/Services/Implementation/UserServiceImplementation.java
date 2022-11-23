@@ -111,10 +111,12 @@ public class UserServiceImplementation implements UserService {
             ipAddress = InetAddress.getByName(ipString);
             response = reader.country(ipAddress);
             country = response.getCountry();
-            return country.getIsoCode().toLowerCase();
+            //return country.getIsoCode().toLowerCase();
+            return ipString;
         }
         catch (GeoIp2Exception e) {
-            return "earth";
+            return ipString;
+            //return "earth";
         }
     }
 }
