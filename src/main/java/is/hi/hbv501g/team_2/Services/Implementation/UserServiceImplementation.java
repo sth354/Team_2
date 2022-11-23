@@ -104,19 +104,21 @@ public class UserServiceImplementation implements UserService {
         userRepository.delete(user);
     }
 
+    /**
+     * @return String which is a 2 letter ISO country code. E.g. Iceland = is.
+     * @throws IOException
+     * @throws GeoIp2Exception
+     */
     public String lookupCountry() throws IOException, GeoIp2Exception {
         try {
             reader = new DatabaseReader.Builder(countryDatabase).build();
-            //ipString = request.getRemoteAddr();
             ipString = request.getHeader("X-FORWARDED-FOR");
             ipAddress = InetAddress.getByName(ipString);
             response = reader.country(ipAddress);
             country = response.getCountry();
             return country.getIsoCode().toLowerCase();
-            //return ipString;
         }
         catch (GeoIp2Exception e) {
-            //return ipString;
             return "earth";
         }
     }
