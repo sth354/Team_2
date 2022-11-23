@@ -105,13 +105,20 @@ public class UserServiceImplementation implements UserService {
     }
 
     public String lookupCountry() throws IOException, GeoIp2Exception {
-        reader = new DatabaseReader.Builder(countryDatabase).build();
-        //ipString = request.getRemoteAddr();
-        //ipAddress = InetAddress.getByName(ipString);
-        //change this line to the two comments above - For testing purposes a standard Icelandic IP;
-        ipAddress = InetAddress.getByName("46.182.187.211");
-        response = reader.country(ipAddress);
-        country = response.getCountry();
-        return country.getIsoCode().toLowerCase();
+        try {
+            reader = new DatabaseReader.Builder(countryDatabase).build();
+            //ipString = request.getRemoteAddr();
+            //ipAddress = InetAddress.getByName(ipString);
+            //change this line to the two comments above - For testing purposes a standard Icelandic IP;
+            ipAddress = InetAddress.getByName("46.182.187.211");
+            response = reader.country(ipAddress);
+            country = response.getCountry();
+            return country.getIsoCode().toLowerCase();
+
+        }
+        catch (GeoIp2Exception e) {
+            return "nan";
+        }
+
     }
 }
