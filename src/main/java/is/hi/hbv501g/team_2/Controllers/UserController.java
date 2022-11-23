@@ -96,7 +96,7 @@ public class UserController {
 
     //@RequestMapping(value = "/userCountry")
     public String userCountry(Model model) throws IOException, GeoIp2Exception {
-
+        userCountry = userService.lookupCountry();
         return "Hello world";
     }
 }
