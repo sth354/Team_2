@@ -10,8 +10,13 @@ public interface MovieService {
 
     List<Movie> findAll();
 
-    List<Movie> getMoviesNotFromDirector(Director director, Integer numberOfMovies);
+
+    Movie getRandomMovie();
+
+
+    List<Movie> getMoviesNotFromDirector(Director director, Integer difficulty, Integer numberOfActualMovies);
 
     List<Movie> getMoviesFromDirector(Director director, Integer numberOfMovies);
 
+    void resetCachedMovies();
 }

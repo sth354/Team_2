@@ -9,60 +9,62 @@
     <h2>All scores</h2>
     <body>
     <div class="menu">
-        <table>
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Points</th>
-                <th>Difficulty</th>
-            </tr>
-        <span>Top ten hard mode scores</span>
-        </thead>
-        <tbody>
-            <tr th:each="score: ${topTenHard}">
-                <td th:text="${score.getUser()}">
-                <td th:text="${score.getPoints()}">
-                <td th:text="${score.getDifficulty()}">
-            </tr>
-        </tbody>
+        <div class="scoreboards">
+            <div class="scoreboard">
+                <span>Top ten hard mode scores</span>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Points</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="score: ${topTenHard}">
+                        <td th:text="${score.getUser()}">
+                        <td th:text="${score.getPoints()}">
+                    </tr>
+                    </tbody>
 
-        </table>
-        <table>
-            <thead>
-            <tr>
-                <th>User</th>
-                <th>Points</th>
-                <th>Difficulty</th>
-            </tr>
-            <span>Top ten medium mode scores</span>
-            </thead>
-            <tbody>
-            <tr th:each="score: ${topTenMedium}">
-                <td th:text="${score.getUser()}">
-                <td th:text="${score.getPoints()}">
-                <td th:text="${score.getDifficulty()}">
-            </tr>
-            </tbody>
+                </table>
+            </div>
 
-        </table>
-        <table>
-            <thead>
-            <tr>
-                <th>User</th>
-                <th>Points</th>
-                <th>Difficulty</th>
-            </tr>
-            <span>Top ten easy mode scores</span>
-            </thead>
-            <tbody>
-            <tr th:each="score: ${topTenEasy}">
-                <td th:text="${score.getUser()}">
-                <td th:text="${score.getPoints()}">
-                <td th:text="${score.getDifficulty()}">
-            </tr>
-            </tbody>
+            <div class="scoreboard">
+                <span>Top ten medium mode scores</span>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Points</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="score: ${topTenMedium}">
+                        <td th:text="${score.getUser()}">
+                        <td th:text="${score.getPoints()}">
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        </table>
+            <div class="scoreboard">
+                <span>Top ten easy mode scores</span>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Points</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="score: ${topTenEasy}">
+                        <td th:text="${score.getUser()}">
+                        <td th:text="${score.getPoints()}">
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     </body>
 </html>

@@ -27,6 +27,7 @@
                         </div>
 
                         <div class="button"><a href="/viewScoreboards">Leaderboards</a></div>
+                        <div class="button"><a href="/movie-of-the-day"> Give me a random movie to watch </a></div>
                     </div>
                 </section>
                 <section class="menu-item">
@@ -43,7 +44,7 @@
                 </section>
                 <!-- Fun facts -->
                 <section>
-                    <div>
+                    <div th:if = "${fact != null}">
                         <span th:text = "${fact.getFact()}"></span>
                     </div>
                 </section>

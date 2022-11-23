@@ -23,9 +23,9 @@
                 <div class="menu-item">
                     <form action="#" th:action="@{/checkAnswer}" method="GET">
                         <div class="director-options">
-                            <div th:each="movie: ${movies}" class="button">
-                                <input type="submit" name="action" th:value="${movie}"/>
-                            </div>
+                            <button th:each="movie: ${movies}" class="game-button" type="submit" name="action" th:value="${movie}">
+                                <span th:text="${movie}"></span>
+                            </button>
                         </div>
                     </form>
                 </div>

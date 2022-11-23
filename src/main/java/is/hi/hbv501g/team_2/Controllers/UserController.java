@@ -46,12 +46,12 @@ public class UserController {
         if(exists == null){
 
             userService.save(user);
+            return "redirect:/";
         }
         else {
             redirAttrs.addFlashAttribute("error_", "This username is already taken");
             return "redirect:/signup";
         }
-        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -68,7 +68,7 @@ public class UserController {
      * @param redirAttrs The redirect attributes that are used to display error messages
      * @return The login page if the form is invalid, otherwise the main page
      */
-    public String loginPOST(User user, BindingResult result, HttpSession session, RedirectAttributes redirAttrs) {
+    public String loginPOST(User user, Model model, BindingResult result, HttpSession session, RedirectAttributes redirAttrs) {
         if (result.hasErrors()) {
             redirAttrs.addFlashAttribute("error", "Unexpected error");
             return "redirect:/login";
@@ -76,7 +76,8 @@ public class UserController {
         User exists = userService.login(user);
         if (exists != null) {
             session.setAttribute("LoggedInUser", exists);
-            return "redirect:/";
+            model.addAttribute("LoggedInUser", exists);
+            return "main";
         }
         redirAttrs.addFlashAttribute("error", "Invalid username or password");
         return "redirect:/login";
