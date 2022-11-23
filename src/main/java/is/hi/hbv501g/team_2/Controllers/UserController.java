@@ -77,7 +77,7 @@ public class UserController {
         if (exists != null) {
             session.setAttribute("LoggedInUser", exists);
             model.addAttribute("LoggedInUser", exists);
-            return "main";
+            return "logInLanding";
         }
         redirAttrs.addFlashAttribute("error", "Invalid username or password");
         return "redirect:/login";
