@@ -5,7 +5,9 @@
     <link rel="stylesheet" href="../static/css/styles.css" type="text/css" th:href="@{/css/styles.css}" />
     <title>Title</title>
 </head>
+
 <body>
+    <h2 class = "nav"> <a th:href="@{/}"> Main menu</a>  </h2>
     <div class="menu">
     <p><span th:text="${randomMovie.getOriginal_title()}"></span> </p>
     <p>Release date <span th:text="${randomMovie.getRelease_date()}"></span> </p>
