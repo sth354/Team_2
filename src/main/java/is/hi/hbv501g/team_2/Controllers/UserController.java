@@ -95,7 +95,7 @@ public class UserController {
 
     @RequestMapping(value = "/userCountry")
     public String userCountry(Model model) throws IOException, GeoIp2Exception {
-        userCountry = (userService.lookupCountry()) + ".svg";
+        userCountry = "Flags/" + (userService.lookupCountry()) + ".svg";
         model.addAttribute("userCountry",userCountry);
         return "userCountry";
     }
