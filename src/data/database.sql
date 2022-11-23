@@ -5,7 +5,6 @@
 -- á windows : \i src//data//database.sql
 -- CREATE TABLE facts (id bigint, fact varchar(255));
 BEGIN;
-
     DROP TABLE IF EXISTS facts CASCADE;
     DROP TABLE IF EXISTS directors CASCADE;
     DROP TABLE IF EXISTS movies CASCADE;
@@ -458,3 +457,4 @@ BEGIN;
     INSERT INTO movies(id,title,year,director_id) VALUES(800,'The Young and the Damned',1950,793);
 
 END;
+

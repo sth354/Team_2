@@ -88,6 +88,16 @@ public class MovieServiceImplementation implements MovieService {
     }
 
     /**
+     * Returns a random movie
+     * @return Movie
+     */
+    public Movie getRandomMovie() {
+        List<Movie> l =  movieRepository.findAll();
+        Random rand = new Random();
+        return l.get(rand.nextInt(l.size()));
+    }
+
+    /**
      * Returns a list of size numberOfMovies containing movies that are from the given director
      * @param director The director to exclude
      * @param numberOfMovies The number of movies to return
