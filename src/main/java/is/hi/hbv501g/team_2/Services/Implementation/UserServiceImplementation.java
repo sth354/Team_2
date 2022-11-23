@@ -115,8 +115,8 @@ public class UserServiceImplementation implements UserService {
             //return ipString;
         }
         catch (GeoIp2Exception e) {
-            //return ipString;
-            return "earth";
+            return ipString;
+            //return "earth";
         }
     }
 }
