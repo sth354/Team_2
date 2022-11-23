@@ -33,7 +33,7 @@
                     <div class="signup">
                         <div th:if="${session.LoggedInUser != null}">
                             <h3>Welcome <div th:text="${session.LoggedInUser}"></div></h3>
-                            <img th:src="@{/Flags/}"/>
+                            <img th:src="${userCountry}"/>
                         </div>
                         <div th:unless="${session.LoggedInUser != null}">
                             <h3>Don't have an account?</h3>

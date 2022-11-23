@@ -1,5 +1,6 @@
 package is.hi.hbv501g.team_2.Controllers;
 
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import is.hi.hbv501g.team_2.Persistence.Entities.Director;
 import is.hi.hbv501g.team_2.Persistence.Entities.Movie;
 import is.hi.hbv501g.team_2.Persistence.Entities.Score;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.*;
 @Controller
 public class GameController {
@@ -22,6 +24,8 @@ public class GameController {
 
     private FactService factService;
     private ScoreboardService scoreboardService;
+
+    private UserService userService;
 
     // lives are number of lives during gameplay
     private int lives;
@@ -36,11 +40,12 @@ public class GameController {
 
 
     @Autowired
-    public GameController(DirectorService directorService, MovieService movieService, ScoreboardService scoreboardService, FactService factService) {
+    public GameController(UserService userService, DirectorService directorService, MovieService movieService, ScoreboardService scoreboardService, FactService factService) {
         this.directorService = directorService;
         this.movieService = movieService;
         this.scoreboardService = scoreboardService;
         this.factService = factService;
+        this.userService = userService;
     }
 
     /**
@@ -80,8 +85,11 @@ public class GameController {
     }
 
     @RequestMapping("/")
-    public String mainMenu(Model model) {
+    public String mainMenu(Model model) throws IOException, GeoIp2Exception {
         model.addAttribute("fact",factService.getRandomFact());
+        String userCountry;
+        userCountry = "/Flags/" + (userService.lookupCountry()) + ".svg";
+        model.addAttribute("userCountry",userCountry);
         return "main";
     }
 

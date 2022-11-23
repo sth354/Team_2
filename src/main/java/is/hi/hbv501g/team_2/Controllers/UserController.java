@@ -93,10 +93,9 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/userCountry")
+    //@RequestMapping(value = "/userCountry")
     public String userCountry(Model model) throws IOException, GeoIp2Exception {
-        userCountry = "Flags/" + (userService.lookupCountry()) + ".svg";
-        model.addAttribute("userCountry",userCountry);
-        return "userCountry";
+
+        return "Hello world";
     }
 }
