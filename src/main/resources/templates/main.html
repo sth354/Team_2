@@ -35,7 +35,6 @@
                         <div th:if="${session.LoggedInUser != null}">
                             <h3>Welcome <div th:text="${session.LoggedInUser}"></div></h3>
                             <img th:src="${userCountry}"/>
-                            <!-- <div>IP is <span th:text = "${UserService.lookupCountry()}"></span></div> -->
                         </div>
                         <div th:unless="${session.LoggedInUser != null}">
                             <h3>Don't have an account?</h3>
