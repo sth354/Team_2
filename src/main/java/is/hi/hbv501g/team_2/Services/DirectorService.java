@@ -9,5 +9,6 @@ import java.util.List;
 public interface DirectorService {
     List<Director> findAll();
 
-    Director getRandomDirector();
+    Director getDirectorFromQueue();
+    void removeDirectorFromQueue();
 }

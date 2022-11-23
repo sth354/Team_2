@@ -14,7 +14,7 @@ import java.util.Random;
 public class FactServiceImplementation implements FactService {
 
     private FactRepository factRepository;
-    Random rand = new Random();
+
 
     @Autowired
     public FactServiceImplementation(FactRepository factRepository) {
@@ -29,6 +29,7 @@ public class FactServiceImplementation implements FactService {
 
     @Override
     public Fact getRandomFact() {
+        Random rand = new Random();
         List<Fact> allFacts = findAll();
         return allFacts.get(rand.nextInt(allFacts.size()));
     }
