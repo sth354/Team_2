@@ -1,5 +1,6 @@
 package is.hi.hbv501g.team_2.Controllers;
 
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import is.hi.hbv501g.team_2.Persistence.Entities.User;
 import is.hi.hbv501g.team_2.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 @Controller
 public class UserController {
     UserService userService;
+    private String userCountry;
 
     @Autowired
     public UserController(UserService userService) {
@@ -42,12 +46,12 @@ public class UserController {
         if(exists == null){
 
             userService.save(user);
+            return "redirect:/";
         }
         else {
             redirAttrs.addFlashAttribute("error_", "This username is already taken");
             return "redirect:/signup";
         }
-        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -64,7 +68,7 @@ public class UserController {
      * @param redirAttrs The redirect attributes that are used to display error messages
      * @return The login page if the form is invalid, otherwise the main page
      */
-    public String loginPOST(User user, BindingResult result, HttpSession session, RedirectAttributes redirAttrs) {
+    public String loginPOST(User user, Model model, BindingResult result, HttpSession session, RedirectAttributes redirAttrs) {
         if (result.hasErrors()) {
             redirAttrs.addFlashAttribute("error", "Unexpected error");
             return "redirect:/login";
@@ -72,7 +76,8 @@ public class UserController {
         User exists = userService.login(user);
         if (exists != null) {
             session.setAttribute("LoggedInUser", exists);
-            return "redirect:/";
+            model.addAttribute("LoggedInUser", exists);
+            return "logInLanding";
         }
         redirAttrs.addFlashAttribute("error", "Invalid username or password");
         return "redirect:/login";
@@ -87,5 +92,11 @@ public class UserController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
+    }
+
+    //@RequestMapping(value = "/userCountry")
+    public String userCountry(Model model) throws IOException, GeoIp2Exception {
+        userCountry = userService.lookupCountry();
+        return "Hello world";
     }
 }

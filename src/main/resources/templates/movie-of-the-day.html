@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/styles.css" type="text/css" th:href="@{/css/styles.css}" />
+    <title>Title</title>
+</head>
+
+<body>
+    <h2 class = "nav"> <a th:href="@{/}"> Main menu</a>  </h2>
+    <div class="menu">
+    <p><span th:text="${randomMovie.getOriginal_title()}"></span> </p>
+    <p>Release date <span th:text="${randomMovie.getRelease_date()}"></span> </p>
+    <p>Rating <span th:text="${randomMovie.getVote_average()}"></span> </p>
+    <p>Runtime (minutes) <span th:text="${randomMovie.getRuntime()}"></span> </p>
+    <img th:src="${randomMovie.makePoster()}">
+        <h1 class="nav"><a th:href="@{movie-of-the-day}"> Another one</a></h1>
+    </div>
+</body>
+</html>
