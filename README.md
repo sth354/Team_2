@@ -8,7 +8,7 @@ Director guessing game
 ## Deployed website
 https://team2-production.up.railway.app/
 
-# Bug warning 
+## Bug warning 
 When returning to main menu after logging in you might encounter a 404.
 Simply navigate to https://team2-production.up.railway.app/ manually and you will be logged in.
 Bug seems to be appearing only on fresh browsers and only on first sign in attempt.
